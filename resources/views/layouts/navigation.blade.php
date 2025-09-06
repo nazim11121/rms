@@ -1,0 +1,202 @@
+      <!-- Sidebar -->
+      <div class="sidebar" data-background-color="dark">
+        <div class="sidebar-logo">
+          <!-- Logo Header -->
+          <div class="logo-header" data-background-color="dark">
+            <a href="index.html" class="logo">
+              <img
+                src="{{asset('assets/img/kaiadmin/logo_light.svg')}}"
+                alt="navbar brand"
+                class="navbar-brand"
+                height="20"
+              />
+            </a>
+            <div class="nav-toggle">
+              <button class="btn btn-toggle toggle-sidebar">
+                <i class="gg-menu-right"></i>
+              </button>
+              <button class="btn btn-toggle sidenav-toggler">
+                <i class="gg-menu-left"></i>
+              </button>
+            </div>
+            <button class="topbar-toggler more">
+              <i class="gg-more-vertical-alt"></i>
+            </button>
+          </div>
+          <!-- End Logo Header -->
+        </div>
+        <div class="sidebar-wrapper scrollbar scrollbar-inner">
+          <div class="sidebar-content">
+            <ul class="nav nav-secondary">
+              <li class="nav-item active">
+                <a
+                  data-bs-toggle="collapse"
+                  href="#dashboard"
+                  class="collapsed"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-home"></i>
+                  <p>Dashboard</p>
+                </a>
+              </li>
+              <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                  <i class="fa fa-ellipsis-h"></i>
+                </span>
+                <h4 class="text-section">Components</h4>
+              </li>
+
+              <li class="nav-item {{ Request::is('checkIn*','admin.checkIn.index','checkIn.create','checkIn.edit','checkIn.page1.create','checkIn.page2.create') ? 'active' : '' }}">
+                  <a data-bs-toggle="collapse" href="#checkIn" aria-expanded="{{ Request::is('checkIn*') ? 'true' : 'false' }}">
+                      <i class="fas fa-layer-group"></i>
+                      <p>Booking Management</p>
+                      <span class="caret"></span>
+                  </a>
+                  <div class="collapse {{ Request::is(['checkIn*','admin.checkIn.index','checkIn.create','checkIn.edit','checkIn.page1.create','checkIn.page2.create']) ? 'show' : '' }}" id="checkIn">
+                      <ul class="nav nav-collapse">
+                          <li class="{{ Request::routeIs(['admin.checkIn.index','checkIn.create','checkIn.edit']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.checkIn.index') }}">
+                                  <span class="sub-item">CheckIn List</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+
+              <li class="nav-item {{ Request::is('package*') ? 'active' : '' }}">
+                  <a data-bs-toggle="collapse" href="#package" aria-expanded="{{ Request::is('package*') ? 'true' : 'false' }}">
+                      <i class="fas fa-layer-group"></i>
+                      <p>package</p>
+                      <span class="caret"></span>
+                  </a>
+                  <div class="collapse {{ Request::is(['package*','admin.package.index','admin.package.create','admin.package.edit']) ? 'show' : '' }}" id="package">
+                      <ul class="nav nav-collapse">
+                          <li class="{{ Request::routeIs(['admin.package.index','admin.package.create','admin.package.edit']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.package.index') }}">
+                                  <span class="sub-item">All</span>
+                              </a>
+                          </li>
+                          <li class="{{ Request::routeIs(['admin.package.category.index','package.category.create','package.category.edit']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.package-category.index') }}">
+                                  <span class="sub-item">Category</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+
+              <li class="nav-item {{ Request::is('room*') ? 'active' : '' }}">
+                  <a data-bs-toggle="collapse" href="#room" aria-expanded="{{ Request::is('room*') ? 'true' : 'false' }}">
+                      <i class="fas fa-layer-group"></i>
+                      <p>Room Management</p>
+                      <span class="caret"></span>
+                  </a>
+                  <div class="collapse {{ Request::is(['room*','admin.room.index','room.create','room.edit','type.index','type.create','type.edit','amenities.index','amenities.create','amenities.edit']) ? 'show' : '' }}" id="room">
+                      <ul class="nav nav-collapse">
+                          <li class="{{ Request::routeIs(['admin.room.index','room.create','room.edit']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.room.index') }}">
+                                  <span class="sub-item">Room List</span>
+                              </a>
+                          </li>
+                          <li class="{{ Request::routeIs(['admin.type.index','type.create','type.edit']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.type.index') }}">
+                                  <span class="sub-item">Room Type List</span>
+                              </a>
+                          </li>
+                          <li class="{{ Request::routeIs(['admin.amenities.index','amenities.create','amenities.edit']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.amenities.index') }}">
+                                  <span class="sub-item">Amenities List</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+
+              <li class="nav-item {{ Request::is('house-keeping*') ? 'active' : '' }}">
+                  <a data-bs-toggle="collapse" href="#house-keeping" aria-expanded="{{ Request::is('house-keeping*') ? 'true' : 'false' }}">
+                      <i class="fas fa-layer-group"></i>
+                      <p>House Keeping</p>
+                      <span class="caret"></span>
+                  </a>
+                  <div class="collapse {{ Request::is(['house-keeping*','admin.house-keeping.index','house-keeping.create','house-keeping.edit']) ? 'show' : '' }}" id="house-keeping">
+                      <ul class="nav nav-collapse">
+                          <li class="{{ Request::routeIs(['admin.house-keeping.index','house-keeping.create','house-keeping.edit']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.house-keeping.index') }}">
+                                  <span class="sub-item">All</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+
+              <li class="nav-item {{ Request::is('laundry*') ? 'active' : '' }}">
+                  <a data-bs-toggle="collapse" href="#laundry" aria-expanded="{{ Request::is('laundry*') ? 'true' : 'false' }}">
+                      <i class="fas fa-layer-group"></i>
+                      <p>Laundry</p>
+                      <span class="caret"></span>
+                  </a>
+                  <div class="collapse {{ Request::is(['laundry*','admin.laundry.index','laundry.create','laundry.edit']) ? 'show' : '' }}" id="laundry">
+                      <ul class="nav nav-collapse">
+                          <li class="{{ Request::routeIs(['admin.laundry.index','laundry.create','laundry.edit']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.laundry.index') }}">
+                                  <span class="sub-item">All</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+
+              <li class="nav-item {{ Request::is('vendors*') ? 'active' : '' }}">
+                  <a data-bs-toggle="collapse" href="#vendor" aria-expanded="{{ Request::is('vendors*') ? 'true' : 'false' }}">
+                      <i class="fas fa-layer-group"></i>
+                      <p>Vendors</p>
+                      <span class="caret"></span>
+                  </a>
+                  <div class="collapse {{ Request::is(['vendors*','admin.vendors.index','vendors.create','vendors.edit']) ? 'show' : '' }}" id="vendor">
+                      <ul class="nav nav-collapse">
+                          <li class="{{ Request::routeIs(['admin.vendors.index','vendors.create','vendors.edit']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.vendors.index') }}">
+                                  <span class="sub-item">All</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+
+              <li class="nav-item {{ Request::is('frontend*') ? 'active' : '' }}">
+                <a data-bs-toggle="collapse" href="#frontend" aria-expanded="{{ Request::is('frontend*') ? 'true' : 'false' }}">
+                  <i class="fas fa-layer-group"></i>
+                  <p>Frontend</p>
+                  <span class="caret"></span>
+                </a>
+                <div class="collapse {{ Request::is(['frontend*','slider*','admin.slider.index','admin.slider.create','admin.slider.edit']) ? 'show' : '' }}" id="frontend">
+                  <ul class="nav nav-collapse">
+                    <!-- <li>
+                      <a href="{{route('menu.index')}}">
+                        <span class="sub-item">Menu</span>
+                      </a>
+                    </li> -->
+                    <li class="{{ Request::routeIs(['admin.slider.index','admin.slider.create','admin.slider.edit']) ? 'active' : '' }}">
+                      <a href="{{route('admin.slider.index')}}">
+                        <span class="sub-item">Slider</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a data-bs-toggle="collapse" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                  <i class="fas fa-layer-group"></i>
+                  <p>Logout</p>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- End Sidebar -->
