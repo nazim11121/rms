@@ -867,42 +867,42 @@
         <!-- Why Choose Us/Facility Section End -->
         <!-- Video-area end -->
         <section class="video-slider py-5">
-  <div class="container">
-    <h2 class="mb-4 text-center">Featured Videos</h2>
-    
-    <div id="videoCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
+    <div class="container">
+        <h2 class="mb-4 text-center">Featured Videos</h2>
 
-        <!-- Slide 1 -->
-        <div class="carousel-item active">
-          <div class="ratio ratio-16x9">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video 1" allowfullscreen></iframe>
-          </div>
+        <div id="videoCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <!-- Slide 1: YouTube -->
+                <div class="carousel-item active">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/Q9phP_kFQuc" title="Video 1" allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Local video -->
+                <div class="carousel-item">
+                    <div class="ratio ratio-16x9">
+                        <video controls>
+                            <source src="{{ asset('videos/your-video.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#videoCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#videoCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
         </div>
-
-        <!-- Slide 2 -->
-        <div class="carousel-item">
-          <div class="ratio ratio-16x9">
-            <video controls>
-              <source src="your-video.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#videoCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#videoCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
-
     </div>
-  </div>
 </section>
+
 
         <!-- Video To Action End -->
         <!-- About section start -->
