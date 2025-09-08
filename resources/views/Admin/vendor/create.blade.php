@@ -33,7 +33,7 @@
                             <h4 class="mb-0">Add Vendor Details</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('vendors.store') }}" method="POST">
+                            <form action="{{ route('admin.vendors.store') }}" method="POST">
                                 @csrf
                                 
                                 <div class="row">

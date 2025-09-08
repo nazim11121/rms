@@ -60,9 +60,9 @@ class HouseKeepingController extends Controller
         $dataStore = HouseKeeping::create($validatedData);
 
         if($dataStore){
-            return redirect()->route('house-keeping.index')->with('success', 'Data Store Successful.');
+            return redirect()->route('admin.house-keeping.index')->with('success', 'Data Store Successful.');
         }else{
-            return redirect()->route('house-keeping.create')->with('error', 'Data Store Failed.');
+            return redirect()->route('admin.house-keeping.create')->with('error', 'Data Store Failed.');
         }
         
     }
@@ -114,9 +114,9 @@ class HouseKeepingController extends Controller
         $dataUpdate = HouseKeeping::where('id', $id)->update($validatedData);
 
         if($dataUpdate){
-            return redirect()->route('house-keeping.index')->with('info', 'Data Updated Successful.');
+            return redirect()->route('admin.house-keeping.index')->with('info', 'Data Updated Successful.');
         }else{
-            return redirect()->route('house-keeping.edit')->with('error', 'Data Update Failed.');
+            return redirect()->route('admin.house-keeping.edit')->with('error', 'Data Update Failed.');
         }
     }
 
@@ -129,9 +129,9 @@ class HouseKeepingController extends Controller
         $data->delete();
 
         if($data){
-            return redirect()->route('house-keeping.index')->with('success', 'Data Deleted Successful.');
+            return redirect()->route('admin.house-keeping.index')->with('success', 'Data Deleted Successful.');
         }else{
-            return redirect()->route('house-keeping.index')->with('error', 'Data Delete Failed.');
+            return redirect()->route('admin.house-keeping.index')->with('error', 'Data Delete Failed.');
         }
     }
 }

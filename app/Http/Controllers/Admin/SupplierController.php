@@ -64,9 +64,9 @@ class SupplierController extends Controller
         $dataStore = Vendor::create($validatedData);
 
         if($dataStore){
-            return redirect()->route('vendors.index')->with('success', 'Data Store Successful.');
+            return redirect()->route('admin.vendors.index')->with('success', 'Data Store Successful.');
         }else{
-            return redirect()->route('vendors.create')->with('error', 'Data Store Failed.');
+            return redirect()->route('admin.vendors.create')->with('error', 'Data Store Failed.');
         }
         
     }
@@ -126,9 +126,9 @@ class SupplierController extends Controller
         $dataUpdate = Vendor::where('id', $id)->update($validatedData);
 
         if($dataUpdate){
-            return redirect()->route('vendors.index')->with('info', 'Data Updated Successful.');
+            return redirect()->route('admin.vendors.index')->with('info', 'Data Updated Successful.');
         }else{
-            return redirect()->route('vendors.edit')->with('error', 'Data Update Failed.');
+            return redirect()->route('admin.vendors.edit')->with('error', 'Data Update Failed.');
         }
     }
 
@@ -141,9 +141,9 @@ class SupplierController extends Controller
         $data->delete();
 
         if($data){
-            return redirect()->route('vendors.index')->with('danger', 'Data Deleted Successful.');
+            return redirect()->route('admin.vendors.index')->with('danger', 'Data Deleted Successful.');
         }else{
-            return redirect()->route('vendors.index')->with('error', 'Data Delete Failed.');
+            return redirect()->route('admin.vendors.index')->with('error', 'Data Delete Failed.');
         }
     }
 }

@@ -60,9 +60,9 @@ class LaundryController extends Controller
         $dataStore = Laundry::create($validatedData);
 
         if($dataStore){
-            return redirect()->route('laundry.index')->with('success', 'Data Store Successful.');
+            return redirect()->route('admin.laundry.index')->with('success', 'Data Store Successful.');
         }else{
-            return redirect()->route('laundry.create')->with('error', 'Data Store Failed.');
+            return redirect()->route('admin.laundry.create')->with('error', 'Data Store Failed.');
         }
         
     }
@@ -117,9 +117,9 @@ class LaundryController extends Controller
         $dataUpdate = Laundry::where('id', $id)->update($validatedData);
 
         if($dataUpdate){
-            return redirect()->route('laundry.index')->with('info', 'Data Updated Successful.');
+            return redirect()->route('admin.laundry.index')->with('info', 'Data Updated Successful.');
         }else{
-            return redirect()->route('laundry.edit')->with('error', 'Data Update Failed.');
+            return redirect()->route('admin.laundry.edit')->with('error', 'Data Update Failed.');
         }
     }
 
@@ -132,9 +132,9 @@ class LaundryController extends Controller
         $data->delete();
 
         if($data){
-            return redirect()->route('laundry.index')->with('success', 'Data Deleted Successful.');
+            return redirect()->route('admin.laundry.index')->with('success', 'Data Deleted Successful.');
         }else{
-            return redirect()->route('laundry.index')->with('error', 'Data Delete Failed.');
+            return redirect()->route('admin.laundry.index')->with('error', 'Data Delete Failed.');
         }
     }
 }

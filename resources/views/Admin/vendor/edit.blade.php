@@ -33,7 +33,7 @@
                             <h4 class="mb-0">Edit Vendor Details</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('vendors.update', $data->id) }}" method="POST">
+                            <form action="{{ route('admin.vendors.update', $data->id) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
                                 <div class="row">

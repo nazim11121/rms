@@ -34,7 +34,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                       <h4 class="card-title float-left">Room Type List</h4>
                       <a
-                          href="{{route('type.create')}}"
+                          href="{{route('admin.type.create')}}"
                                 type="button"
                                 id="addRowButton"
                                 class="btn btn-primary float-right"
@@ -80,8 +80,8 @@
                               <td>{{$value->kids_capacity}}</td>
                               <td>@if($value->status==1) <span>Active</span>@else<span>Inactive</span>@endif</td>
                               <td class="text-nowrap">
-                                  <a href="{{route('type.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                                  <form action="{{ route('type.destroy', $value->id) }}" method="POST" style="display: inline-block;">
+                                  <a href="{{route('admin.type.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
+                                  <form action="{{ route('admin.type.destroy', $value->id) }}" method="POST" style="display: inline-block;">
                                       @csrf
                                       @method('DELETE')
                                       <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this?')">

@@ -33,7 +33,7 @@
                             <h4 class="mb-0">Add Check In Information</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('checkIn.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.checkIn.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <!-- Check-In Date -->

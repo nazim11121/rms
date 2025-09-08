@@ -33,7 +33,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                       <h4 class="card-title float-left">Booking List</h4>
                       <a
-                          href="{{route('checkIn.create')}}"
+                          href="{{route('admin.checkIn.create')}}"
                                 type="button"
                                 id="addRowButton"
                                 class="btn btn-primary float-right"
@@ -83,9 +83,9 @@
                               <td>{{ date('d-m-Y', strtotime($value->start_date))}} to {{ date('d-m-Y', strtotime($value->end_date))}}</td>
                               <td>@if($value->status==1) <span>Booked</span>@else<span>Incomplete</span>@endif</td>
                               <td class="text-nowrap">
-                                  <a href="{{route('checkIn.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                                  <a href="{{route('checkout.create', $value->id)}}" class="btn btn-info btn-xs"><i class="fa fa-view"></i> Checkout</a>
-                                  <form action="{{ route('checkIn.destroy', $value->id) }}" method="POST" style="display: inline-block;">
+                                  <a href="{{route('admin.checkIn.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
+                                  <a href="{{route('admin.checkout.create', $value->id)}}" class="btn btn-info btn-xs"><i class="fa fa-view"></i> Checkout</a>
+                                  <form action="{{ route('admin.checkIn.destroy', $value->id) }}" method="POST" style="display: inline-block;">
                                       @csrf
                                       @method('DELETE')
                                       <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this?')">

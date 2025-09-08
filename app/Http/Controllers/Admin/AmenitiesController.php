@@ -50,9 +50,9 @@ class AmenitiesController extends Controller
         $dataStore = Amenities::create($validatedData);
 
         if($dataStore){
-            return redirect()->route('amenities.index')->with('success', 'Data Store Successful.');
+            return redirect()->route('admin.amenities.index')->with('success', 'Data Store Successful.');
         }else{
-            return redirect()->route('amenities.create')->with('error', 'Data Store Failed.');
+            return redirect()->route('admin.amenities.create')->with('error', 'Data Store Failed.');
         }
         
     }
@@ -98,9 +98,9 @@ class AmenitiesController extends Controller
         $dataUpdate = Amenities::where('id', $id)->update($validatedData);
 
         if($dataUpdate){
-            return redirect()->route('amenities.index')->with('info', 'Data Updated Successful.');
+            return redirect()->route('admin.amenities.index')->with('info', 'Data Updated Successful.');
         }else{
-            return redirect()->route('amenities.edit')->with('error', 'Data Update Failed.');
+            return redirect()->route('admin.amenities.edit')->with('error', 'Data Update Failed.');
         }
     }
 
@@ -113,9 +113,9 @@ class AmenitiesController extends Controller
         $data->delete();
 
         if($data){
-            return redirect()->route('amenities.index')->with('danger', 'Data Deleted Successful.');
+            return redirect()->route('admin.amenities.index')->with('danger', 'Data Deleted Successful.');
         }else{
-            return redirect()->route('amenities.index')->with('error', 'Data Delete Failed.');
+            return redirect()->route('admin.amenities.index')->with('error', 'Data Delete Failed.');
         }
     }
 }

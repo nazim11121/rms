@@ -36,7 +36,7 @@
                             <h4 class="mb-0">Add Check In Information</h4>
                         </div>
                         <div class="container">
-                            <form method="POST" action="{{ route('checkIn.page2.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.checkIn.page2.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="booking_id" value="{{ $id }}">
                                 <!-- Room Selection Section -->

@@ -30,7 +30,7 @@
                             <h4 class="mb-0">Add Laundry</h4>
                         </div>
                         <div class="card-body">
-                          <form id="laundryForm" action="{{ route('laundry.store') }}" method="POST">
+                          <form id="laundryForm" action="{{ route('admin.laundry.store') }}" method="POST">
                               @csrf
                               <div class="table-responsive">
                                   <div class="d-flex">

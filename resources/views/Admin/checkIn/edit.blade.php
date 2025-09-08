@@ -36,7 +36,7 @@
                             <h4 class="mb-0">Edit Check In Information</h4>
                         </div>
                         <div class="container">
-                            <form method="POST" action="{{ route('checkIn.update', $data->id) }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.checkIn.update', $data->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')
                                 <input type="hidden" name="booking_id" value="{{ $data->id }}">

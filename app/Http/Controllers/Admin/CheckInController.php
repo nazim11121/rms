@@ -52,9 +52,9 @@ class CheckInController extends Controller
         $dataStore = CheckIn::create($validatedData);
 
         if($dataStore){
-            return redirect()->route('checkIn.page2.create', $dataStore->id)->with('success', 'Data Store Successful.');
+            return redirect()->route('admin.checkIn.page2.create', $dataStore->id)->with('success', 'Data Store Successful.');
         }else{
-            return redirect()->route('checkIn.create')->with('error', 'Data Store Failed.');
+            return redirect()->route('admin.checkIn.create')->with('error', 'Data Store Failed.');
         }
         
     }
@@ -99,9 +99,9 @@ class CheckInController extends Controller
         $dataStore = CheckIn::where('id', $request->booking_id)->update($validatedData);
 
         if($dataStore){
-            return redirect()->route('checkIn.index')->with('success', 'Data Store Successful.');
+            return redirect()->route('admin.checkIn.index')->with('success', 'Data Store Successful.');
         }else{
-            return redirect()->route('checkIn.page2.create', $request->booking_id)->with('error', 'Data Store Failed.');
+            return redirect()->route('admin.checkIn.page2.create', $request->booking_id)->with('error', 'Data Store Failed.');
         }
     }
 
@@ -167,9 +167,9 @@ class CheckInController extends Controller
         $dataUpdate = CheckIn::where('id', $id)->update($validatedData);
 
         if($dataUpdate){
-            return redirect()->route('checkIn.index')->with('info', 'Data Updated Successful.');
+            return redirect()->route('admin.checkIn.index')->with('info', 'Data Updated Successful.');
         }else{
-            return redirect()->route('checkIn.edit')->with('error', 'Data Update Failed.');
+            return redirect()->route('admin.checkIn.edit')->with('error', 'Data Update Failed.');
         }
     }
 
@@ -182,9 +182,9 @@ class CheckInController extends Controller
         $data->delete();
 
         if($data){
-            return redirect()->route('checkIn.index')->with('success', 'Data Deleted Successful.');
+            return redirect()->route('admin.checkIn.index')->with('success', 'Data Deleted Successful.');
         }else{
-            return redirect()->route('checkIn.index')->with('error', 'Data Delete Failed.');
+            return redirect()->route('admin.checkIn.index')->with('error', 'Data Delete Failed.');
         }
     }
 

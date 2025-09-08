@@ -32,7 +32,7 @@
                             <h4 class="mb-0">Edit</h4>
                         </div>
                        <div class="card-body">
-                          <form action="{{route('house-keeping.update', $data->id)}}" method="POST">
+                          <form action="{{route('admin.house-keeping.update', $data->id)}}" method="POST">
                               @csrf
                               @method('PATCH')
                               <div class="row">

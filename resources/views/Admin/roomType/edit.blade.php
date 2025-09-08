@@ -36,7 +36,7 @@
                             <h4 class="mb-0">Edit Room Type</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('type.update', $data->id) }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.type.update', $data->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('put')
                                 <!-- Name -->

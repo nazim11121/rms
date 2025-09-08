@@ -33,7 +33,7 @@
                             <h4 class="mb-0">Edit Amenities</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('amenities.update', $data->id) }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.amenities.update', $data->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('put')
                                 <!-- Name -->

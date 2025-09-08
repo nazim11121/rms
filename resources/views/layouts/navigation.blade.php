@@ -52,9 +52,9 @@
                       <p>Booking Management</p>
                       <span class="caret"></span>
                   </a>
-                  <div class="collapse {{ Request::is(['checkIn*','admin.checkIn.index','checkIn.create','checkIn.edit','checkIn.page1.create','checkIn.page2.create']) ? 'show' : '' }}" id="checkIn">
+                  <div class="collapse {{ Request::is(['checkIn*','admin.checkIn.index','admin.checkIn.create','admin.checkIn.edit','admin.checkIn.page1.create','admin.checkIn.page2.create']) ? 'show' : '' }}" id="checkIn">
                       <ul class="nav nav-collapse">
-                          <li class="{{ Request::routeIs(['admin.checkIn.index','checkIn.create','checkIn.edit']) ? 'active' : '' }}">
+                          <li class="{{ Request::routeIs(['admin.checkIn.index','admin.checkIn.create','admin.checkIn.edit']) ? 'active' : '' }}">
                               <a href="{{ route('admin.checkIn.index') }}">
                                   <span class="sub-item">CheckIn List</span>
                               </a>
@@ -103,7 +103,7 @@
                                   <span class="sub-item">Room Type List</span>
                               </a>
                           </li>
-                          <li class="{{ Request::routeIs(['admin.amenities.index','amenities.create','amenities.edit']) ? 'active' : '' }}">
+                          <li class="{{ Request::routeIs(['admin.amenities.index','admin.amenities.create','admin.amenities.edit']) ? 'active' : '' }}">
                               <a href="{{ route('admin.amenities.index') }}">
                                   <span class="sub-item">Amenities List</span>
                               </a>
@@ -118,9 +118,9 @@
                       <p>House Keeping</p>
                       <span class="caret"></span>
                   </a>
-                  <div class="collapse {{ Request::is(['house-keeping*','admin.house-keeping.index','house-keeping.create','house-keeping.edit']) ? 'show' : '' }}" id="house-keeping">
+                  <div class="collapse {{ Request::is(['house-keeping*','admin.house-keeping.index','admin.house-keeping.create','admin.house-keeping.edit']) ? 'show' : '' }}" id="house-keeping">
                       <ul class="nav nav-collapse">
-                          <li class="{{ Request::routeIs(['admin.house-keeping.index','house-keeping.create','house-keeping.edit']) ? 'active' : '' }}">
+                          <li class="{{ Request::routeIs(['admin.house-keeping.index','admin.house-keeping.create','admin.house-keeping.edit']) ? 'active' : '' }}">
                               <a href="{{ route('admin.house-keeping.index') }}">
                                   <span class="sub-item">All</span>
                               </a>
@@ -135,9 +135,9 @@
                       <p>Laundry</p>
                       <span class="caret"></span>
                   </a>
-                  <div class="collapse {{ Request::is(['laundry*','admin.laundry.index','laundry.create','laundry.edit']) ? 'show' : '' }}" id="laundry">
+                  <div class="collapse {{ Request::is(['laundry*','admin.laundry.index','admin.laundry.create','admin.laundry.edit']) ? 'show' : '' }}" id="laundry">
                       <ul class="nav nav-collapse">
-                          <li class="{{ Request::routeIs(['admin.laundry.index','laundry.create','laundry.edit']) ? 'active' : '' }}">
+                          <li class="{{ Request::routeIs(['admin.laundry.index','admin.laundry.create','admin.laundry.edit']) ? 'active' : '' }}">
                               <a href="{{ route('admin.laundry.index') }}">
                                   <span class="sub-item">All</span>
                               </a>
@@ -152,9 +152,9 @@
                       <p>Vendors</p>
                       <span class="caret"></span>
                   </a>
-                  <div class="collapse {{ Request::is(['vendors*','admin.vendors.index','vendors.create','vendors.edit']) ? 'show' : '' }}" id="vendor">
+                  <div class="collapse {{ Request::is(['vendors*','admin.vendors.index','admin.vendors.create','admin.vendors.edit']) ? 'show' : '' }}" id="vendor">
                       <ul class="nav nav-collapse">
-                          <li class="{{ Request::routeIs(['admin.vendors.index','vendors.create','vendors.edit']) ? 'active' : '' }}">
+                          <li class="{{ Request::routeIs(['admin.vendors.index','admin.vendors.create','admin.vendors.edit']) ? 'active' : '' }}">
                               <a href="{{ route('admin.vendors.index') }}">
                                   <span class="sub-item">All</span>
                               </a>
