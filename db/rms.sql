@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 06, 2025 at 06:30 PM
+-- Generation Time: Sep 08, 2025 at 06:15 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.3.6
 
@@ -395,7 +395,7 @@ CREATE TABLE IF NOT EXISTS `packages` (
 --
 
 INSERT INTO `packages` (`id`, `name`, `category_id`, `no_of_person`, `no_of_day`, `price`, `price_for`, `no_of_bed_room`, `no_of_bed`, `no_food_serve`, `food_item`, `description`, `image`, `start_date`, `end_date`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`) VALUES
-(1, 'Package-1', 1, 2, 2, 20000, NULL, NULL, NULL, NULL, NULL, 'djhwui', 'uploads/packages/1744394495.png', NULL, NULL, 1, 1, 1, '2025-04-11 12:01:35', '2025-09-06 09:58:59');
+(1, 'Package-1', 1, 2, 2, 20000, 'Fixed', NULL, NULL, NULL, NULL, 'djhwui', 'uploads/packages/1744394495.png', NULL, NULL, 1, 1, 1, '2025-04-11 12:01:35', '2025-09-07 09:46:55');
 
 -- --------------------------------------------------------
 
@@ -472,9 +472,9 @@ CREATE TABLE IF NOT EXISTS `rooms` (
 --
 
 INSERT INTO `rooms` (`id`, `type`, `name`, `room_no`, `floor`, `priority`, `description`, `image`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '1', 'test', '102', '1st Floor', NULL, NULL, NULL, 1, 1, 1, '2025-02-24 10:01:59', '2025-02-24 10:27:52', '2025-02-24 10:27:52'),
-(2, '1', 'test2', '1011', '6th Floor', NULL, NULL, 'uploads/roomType/1742637177.jpg', 1, 1, 1, '2025-02-24 10:26:07', '2025-03-22 03:52:57', NULL),
-(3, '1', 'test33', '1022', '5th Floor', 1022, NULL, NULL, 1, 1, NULL, '2025-02-28 22:47:10', '2025-02-28 22:47:10', NULL);
+(1, '1', 'test', '102', '1st Floor', NULL, NULL, 'uploads/room/1757354315.png', 1, 1, 1, '2025-02-24 10:01:59', '2025-09-08 11:58:35', NULL),
+(2, '1', 'test2', '1011', '6th Floor', NULL, NULL, 'uploads/room/1757354086.jpg', 1, 1, 1, '2025-02-24 10:26:07', '2025-09-08 11:54:46', NULL),
+(3, '1', 'test33', '1022', '5th Floor', 1022, NULL, 'uploads/room/1757354017.png', 1, 1, 1, '2025-02-28 22:47:10', '2025-09-08 11:53:37', NULL);
 
 -- --------------------------------------------------------
 
@@ -543,7 +543,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('OtJnEfWbjdc8EydL2PMKok0xrUso3bjtzlpNzh98', 1, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiRGE3OHJ6ejhHY1h3R1B0c3VKZGZGeG9JNHpuTHBVY2ZIekV6eE1MSCI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNjoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL3BhY2thZ2UvMS9lZGl0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1757174624);
+('RiHFBZYcq32AjLm0u3uIHy690KmBMlXIsaVXL7y2', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiakNqZmpLSTlqUElBRGZZUjZGMHBEeVdNMmRCTWhnNEJvN0Jta1licCI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1757355268);
 
 -- --------------------------------------------------------
 

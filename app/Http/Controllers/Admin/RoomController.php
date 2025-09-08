@@ -67,9 +67,9 @@ class RoomController extends Controller
         $dataStore = Room::create($validatedData);
 
         if($dataStore){
-            return redirect()->route('room.index')->with('success', 'Data Store Successful.');
+            return redirect()->route('admin.room.index')->with('success', 'Data Store Successful.');
         }else{
-            return redirect()->route('room.create')->with('error', 'Data Store Failed.');
+            return redirect()->route('admin.room.create')->with('error', 'Data Store Failed.');
         }
         
     }
@@ -131,9 +131,9 @@ class RoomController extends Controller
         $dataUpdate = Room::where('id', $id)->update($validatedData);
 
         if($dataUpdate){
-            return redirect()->route('room.index')->with('info', 'Data Updated Successful.');
+            return redirect()->route('admin.room.index')->with('info', 'Data Updated Successful.');
         }else{
-            return redirect()->route('room.edit')->with('error', 'Data Update Failed.');
+            return redirect()->route('admin.room.edit')->with('error', 'Data Update Failed.');
         }
     }
 
@@ -146,9 +146,9 @@ class RoomController extends Controller
         $data->delete();
 
         if($data){
-            return redirect()->route('room.index')->with('success', 'Data Deleted Successful.');
+            return redirect()->route('admin.room.index')->with('success', 'Data Deleted Successful.');
         }else{
-            return redirect()->route('room.index')->with('error', 'Data Delete Failed.');
+            return redirect()->route('admin.room.index')->with('error', 'Data Delete Failed.');
         }
     }
 }

@@ -91,14 +91,14 @@
                       <p>Room Management</p>
                       <span class="caret"></span>
                   </a>
-                  <div class="collapse {{ Request::is(['room*','admin.room.index','room.create','room.edit','type.index','type.create','type.edit','amenities.index','amenities.create','amenities.edit']) ? 'show' : '' }}" id="room">
+                  <div class="collapse {{ Request::is(['room*','admin.room.index','admin.room.create','admin.room.edit','admin.type.index','admin.type.create','admin.type.edit','admin.amenities.index','admin.amenities.create','admin.amenities.edit']) ? 'show' : '' }}" id="room">
                       <ul class="nav nav-collapse">
-                          <li class="{{ Request::routeIs(['admin.room.index','room.create','room.edit']) ? 'active' : '' }}">
+                          <li class="{{ Request::routeIs(['admin.room.index','admin.room.create','admin.room.edit']) ? 'active' : '' }}">
                               <a href="{{ route('admin.room.index') }}">
                                   <span class="sub-item">Room List</span>
                               </a>
                           </li>
-                          <li class="{{ Request::routeIs(['admin.type.index','type.create','type.edit']) ? 'active' : '' }}">
+                          <li class="{{ Request::routeIs(['admin.type.index','admin.type.create','admin.type.edit']) ? 'active' : '' }}">
                               <a href="{{ route('admin.type.index') }}">
                                   <span class="sub-item">Room Type List</span>
                               </a>

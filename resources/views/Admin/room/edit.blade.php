@@ -33,7 +33,7 @@
                             <h4 class="mb-0">Add Room</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('room.update', $data->id) }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.room.update', $data->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('put')
                                 <!-- Room Type -->

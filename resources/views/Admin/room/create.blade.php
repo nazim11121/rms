@@ -33,7 +33,7 @@
                             <h4 class="mb-0">Add Room</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('room.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.room.store') }}" enctype="multipart/form-data">
                             @csrf
                                 <!-- Room Type -->
                                 <div class="mb-3 row">

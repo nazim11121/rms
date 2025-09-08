@@ -29,8 +29,8 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nice-select2@2.1.0/dist/css/nice-select2.min.css">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nice-select2@2.1.0/dist/css/nice-select2.min.css">
 
-
-  <link rel="stylesheet" href="https://codecanyon8.kreativdev.com/hotelia/demo/front/theme_four/assets/css/vendors/bootstrap.min.css">
+  <link rel="stylesheet" href="{{asset('/assets/css/bootstrap.min.css')}}">
+  <!-- <link rel="stylesheet" href="https://codecanyon8.kreativdev.com/hotelia/demo/front/theme_four/assets/css/vendors/bootstrap.min.css"> -->
   <!-- Fontawesome Icon CSS -->
   <!-- <link rel="stylesheet" href="https://codecanyon8.kreativdev.com/hotelia/demo/front/theme_four/assets/fonts/fontawesome/css/all.min.css"> -->
   <!-- Icomoon Icon CSS -->

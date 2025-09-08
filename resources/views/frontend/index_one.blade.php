@@ -724,86 +724,69 @@
 
         <!-- Product-area start -->
         <section class="product-area pb-75">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12" data-aos="fade-up">
-                        <div class="section-title title-inline mb-50" data-aos="fade-up">
-                            <h2 class="title">Featured Rooms</h2>
-                            <a href="https://codecanyon8.kreativdev.com/hotelia/demo/rooms" class="btn btn-lg btn-primary">All Rooms</a>
-                        </div>
-                    </div>
-                    
-                    <div class="col-12">
-                        <div class="swiper product-slider" id="product-slider-1" data-slides-per-view="4">
-                            <div class="swiper-wrapper">                                                            
-                                <div class="swiper-slide" data-aos="fade-up">
-                                    <div class="product-default pb-25">
-                                        <figure class="product-img">
-                                            <a href="https://codecanyon8.kreativdev.com/hotelia/demo/room_details/31/four-points-by-sheraton-manhattan-midtown-west"
-                                                                class="lazy-container radius-md ratio ratio-3-4" target="_self"
-                                                                title="Link">
-                                                <img class="lazyload" data-src="https://codecanyon8.kreativdev.com/hotelia/demo/assets/img/rooms/1623648535.jpg"
-                                                                    alt="Product">
-                                            </a>
-                                        </figure>
-                                        <div class="product-details p-15 border radius-md mx-auto">
-                                            <div class="d-flex align-items-center gap-3 justify-content-between">
-                                                <span class="product-tag border radius-sm">
-                                                    Regular Room
-                                                </span>
-                                                <div class="product-price">
-                                                    <span class="h6 new-price color-primary">
-                                                                        $
-                                                                        20.00
-                                                                        
-                                                    </span>
-                                                    <span class="font-sm">
-                                                        /&nbsp;Night
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <h6 class="product-title lc-1 mt-2">
-                                                <a href="https://codecanyon8.kreativdev.com/hotelia/demo/room_details/31/four-points-by-sheraton-manhattan-midtown-west"
-                                                    target="_self"
-                                                    title="Link">Four Points by Sheraton Manhattan Midtown West</a>
-                                            </h6>
-                                            <div class="author mb-15 font-sm">
-                                                <span><a href="https://codecanyon8.kreativdev.com/hotelia/demo/room_details/31/four-points-by-sheraton-manhattan-midtown-west"
-                                                        target="_self" title="Author Link"></a> </span>
-                                            </div>
-                                            <ul class="product-icon-list list-unstyled d-flex align-items-center">
-                                                                <li class="icon-start font-xsm">
-                                                                    <i class="fas fa-bed"></i>
-                                                                    <span>
-                                                                        2
-                                                                        Beds
-                                                                    </span>
-                                                                </li>
-                                                                <li class="icon-start font-xsm">
-                                                                    <i class="fas fa-bath"></i>
-                                                                    <span>
-                                                                        2
-                                                                        Baths
-                                                                    </span>
-                                                                </li>
-                                                                <li class="icon-start font-xsm">
-                                                                    <i class="fas fa-users"></i>
-                                                                    <span>
-                                                                        5
-                                                                        Guests
-                                                                    </span>
-                                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div><!-- product-default -->
-                                </div>
-                            </div>
-                            <div class="swiper-pagination position-static mb-25" id="product-slider-1-pagination"></div>
-                        </div>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12" data-aos="fade-up">
+                <div class="section-title title-inline mb-50" data-aos="fade-up">
+                    <h2 class="title">Featured Rooms</h2>
+                    <a href="#" class="btn btn-lg btn-primary">All Rooms</a>
                 </div>
             </div>
-        </section>
+
+            <div class="col-12">
+                <div class="swiper product-slider" id="product-slider-1" data-slides-per-view="4">
+                    <div class="swiper-wrapper">
+                        @foreach($rooms as $room)
+                        <div class="swiper-slide" data-aos="fade-up">
+                            <div class="product-default pb-25">
+                                <figure class="product-img">
+                                    <a href="#"
+                                       class="lazy-container radius-md ratio ratio-3-4" target="_self"
+                                       title="{{ $room->name }}">
+                                        <img class="lazyload" data-src="{{ asset('/'.$room->image) }}"
+                                             alt="{{ $room->name }}">
+                                    </a>
+                                </figure>
+                                <div class="product-details p-15 border radius-md mx-auto">
+                                    <div class="d-flex align-items-center gap-3 justify-content-between">
+                                        <span class="product-tag border radius-sm">{{ $room->roomType->name }}</span>
+                                        <div class="product-price">
+                                            <span class="h6 new-price color-primary">৳{{ number_format($room->roomType->base_price) }}</span>
+                                            <span class="font-sm">/&nbsp;Night</span>
+                                        </div>
+                                    </div>
+                                    <h6 class="product-title lc-1 mt-2">
+                                        <a href="#"
+                                           target="_self" title="{{ $room->name }}">{{ $room->name }}</a>
+                                    </h6>
+                                    <ul class="product-icon-list list-unstyled d-flex align-items-center">
+                                        <li class="icon-start font-xsm">
+                                            <i class="fas fa-bed"></i>
+                                            <span>{{ $room->beds }} Beds</span>
+                                        </li>
+                                        <li class="icon-start font-xsm">
+                                            <!-- <i class="fas fa-bath"></i> -->
+                                            <!-- <span>{{ $room->baths }} Baths</span> -->
+                                            <i class="fas fa-child"></i>
+                                            <span>{{ $room->roomType->kids_capacity ?? 0 }} Kids</span>
+                                        </li>
+                                        <li class="icon-start font-xsm">
+                                            <i class="fas fa-users"></i>
+                                            <span>{{ $room->roomType->adult_capacity ?? 0 }} Guests</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-pagination position-static mb-25" id="product-slider-1-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
         <!-- Why Choose Us/Facility Section Start -->
         <section class="choose-area choose-3 pt-100 pb-60">
             <div class="container">

@@ -34,7 +34,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                       <h4 class="card-title float-left">Room List</h4>
                       <a
-                          href="{{route('room.create')}}"
+                          href="{{route('admin.room.create')}}"
                                 type="button"
                                 id="addRowButton"
                                 class="btn btn-primary float-right"
@@ -74,14 +74,14 @@
                           @foreach($allData as $key=>$value)
                             <tr>
                               <td>{{$value->name}}</td>
-                              <td>{{$value->type}}</td>
+                              <td>{{$value->roomType->name}}</td>
                               <td>{{$value->room_no}}</td>
                               <td>{{$value->floor}}</td>
                               <td>{{$value->priority}}</td>
                               <td>@if($value->status==1) <span>Active</span>@else<span>Inactive</span>@endif</td>
                               <td class="text-nowrap">
-                                  <a href="{{route('room.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                                  <form action="{{ route('room.destroy', $value->id) }}" method="POST" style="display: inline-block;">
+                                  <a href="{{route('admin.room.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
+                                  <form action="{{ route('admin.room.destroy', $value->id) }}" method="POST" style="display: inline-block;">
                                       @csrf
                                       @method('DELETE')
                                       <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this?')">

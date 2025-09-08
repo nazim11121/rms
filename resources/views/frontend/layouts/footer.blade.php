@@ -83,7 +83,7 @@
   // var vapid_public_key = "BEkl_c-YonLP2T1CbipEED78QNCsO9R66atKdMc3Bp9zA59PblDhfHrMmNi3FOmyImCmffhwKYa97vWjbakJO0M";
 </script>
 
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <!-- Jquery JS -->
     <script src="https://codecanyon8.kreativdev.com/hotelia/demo/front/theme_four/assets/js/vendors/jquery.min.js"></script>
     <!-- Popper JS -->
