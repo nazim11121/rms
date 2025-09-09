@@ -1,7 +1,7 @@
                 <footer class="footer">
                 <div class="container-fluid d-flex justify-content-between">
                     <nav class="pull-left">
-                    <ul class="nav">
+                    <!-- <ul class="nav">
                         <li class="nav-item">
                         <a class="nav-link" href="#">
                             About
@@ -13,7 +13,7 @@
                         <li class="nav-item">
                         <a class="nav-link" href="#"> Support </a>
                         </li>
-                    </ul>
+                    </ul> -->
                     </nav>
                     <div class="copyright">
                     &copy;{{date('Y')}}, made with <i class="fa fa-heart heart text-danger"></i> by

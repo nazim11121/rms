@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 08, 2025 at 06:15 PM
+-- Generation Time: Sep 09, 2025 at 05:59 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.3.6
 
@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `house_keepings` (
 --
 
 INSERT INTO `house_keepings` (`id`, `amenities_id`, `room_no`, `description`, `vendor_id`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '[\"2\",\"3\"]', '2', 'dfghjk efef', NULL, 1, 1, 1, '2025-03-03 11:38:25', '2025-03-03 12:31:11', NULL);
+(1, '[\"2\",\"3\"]', '2', 'dfghjk efef', '1', 1, 1, 1, '2025-03-03 11:38:25', '2025-09-09 09:48:46', NULL);
 
 -- --------------------------------------------------------
 
@@ -295,14 +295,15 @@ CREATE TABLE IF NOT EXISTS `laundries` (
   KEY `laundries_vendor_id_index` (`vendor_id`),
   KEY `laundries_assign_date_index` (`assign_date`),
   KEY `laundries_receive_date_index` (`receive_date`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `laundries`
 --
 
 INSERT INTO `laundries` (`id`, `amenities_id`, `quantity`, `room_no`, `description`, `vendor_id`, `status`, `assign_date`, `receive_date`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, '[\"2\",\"3\"]', '[\"1\",\"2\"]', NULL, NULL, '1', 0, '2025-03-05', NULL, 1, NULL, '2025-03-05 06:39:48', '2025-03-05 06:39:48', NULL);
+(3, '[\"2\",\"3\"]', '[\"1\",\"2\"]', NULL, NULL, '1', 0, '2025-03-05', NULL, 1, NULL, '2025-03-05 06:39:48', '2025-09-09 09:49:04', '2025-09-09 09:49:04'),
+(4, '[\"2\",\"3\"]', '[\"2\",\"4\"]', NULL, NULL, '1', 0, '2025-09-09', NULL, 1, 1, '2025-09-09 09:49:31', '2025-09-09 10:19:29', NULL);
 
 -- --------------------------------------------------------
 
@@ -543,7 +544,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('RiHFBZYcq32AjLm0u3uIHy690KmBMlXIsaVXL7y2', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiakNqZmpLSTlqUElBRGZZUjZGMHBEeVdNMmRCTWhnNEJvN0Jta1licCI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czozOiJ1cmwiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1757355268);
+('kRL9s7BNRTsNRgWQRrZ6Y5sB4e4zRHebJi329jyg', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiMlhONmlGM0l0NFpUQ2RmNjBKZHJYN2pDSWNnNE9OUzVKbU5DczdvZyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjIxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjE4OiJmbGFzaGVyOjplbnZlbG9wZXMiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1757440723);
 
 -- --------------------------------------------------------
 
@@ -631,7 +632,15 @@ CREATE TABLE IF NOT EXISTS `vendors` (
   KEY `vendors_email_index` (`email`),
   KEY `vendors_gender_index` (`gender`),
   KEY `vendors_image_index` (`image`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `vendors`
+--
+
+INSERT INTO `vendors` (`id`, `name`, `nid_no`, `address`, `mobile`, `email`, `gender`, `image`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Mr. Ashiq', '2323234323', NULL, '01756545678', 'ashiq@gmail.com', 'Male', NULL, 1, 1, NULL, '2025-09-09 09:36:11', '2025-09-09 09:36:11', NULL),
+(2, 'Md. Osim', '2323444323', '12/12 Mirpur, Dhaka-1212', '01700545678', 'osim@gmail.com', 'Male', 'uploads/documents/1757432846.jpeg', 1, 1, 1, '2025-09-09 09:37:36', '2025-09-09 09:47:27', NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -45,12 +45,12 @@
                 >
                   <span class="service-counter">1</span>
                   <div class="service-icon">
-                    <i class="far fa-building"></i>
+                    <i class="fas fa-building"></i>
                   </div>
                   <h4>Rooms &amp; Appartment</h4>
                   <p>Great explorer of the truth the ter...</p>
                                       <a href="https://codecanyon8.kreativdev.com/hotelia/demo/service_details/7/rooms-&amp;-appartment" class="read-more">
-                      read more <i class="far fa-long-arrow-right"></i>
+                      read more <i class="fas fa-long-arrow-right"></i>
                     </a>
                                   </div>
               </div>
@@ -63,12 +63,12 @@
                 >
                   <span class="service-counter">2</span>
                   <div class="service-icon">
-                    <i class="far fa-lemon iconpicker-component"></i>
+                    <i class="fas fa-lemon iconpicker-component"></i>
                   </div>
                   <h4>Food &amp; Restaurant</h4>
                   <p>Great explorer of the truth the ter...</p>
                                       <a href="https://codecanyon8.kreativdev.com/hotelia/demo/service_details/8/food-&amp;-restaurant" class="read-more">
-                      read more <i class="far fa-long-arrow-right"></i>
+                      read more <i class="fas fa-long-arrow-right"></i>
                     </a>
                                   </div>
               </div>
@@ -86,7 +86,7 @@
                   <h4>Spa &amp; Fitness</h4>
                   <p>Great explorer of the truth the ter...</p>
                                       <a href="https://codecanyon8.kreativdev.com/hotelia/demo/service_details/9/spa-&amp;-fitness" class="read-more">
-                      read more <i class="far fa-long-arrow-right"></i>
+                      read more <i class="fas fa-long-arrow-right"></i>
                     </a>
                                   </div>
               </div>
@@ -114,7 +114,7 @@
                 >
                   <span class="service-counter">5</span>
                   <div class="service-icon">
-                    <i class="far fa-calendar-alt"></i>
+                    <i class="fas fa-calendar-alt"></i>
                   </div>
                   <h4>Event &amp; Party</h4>
                   <p>Great explorer of the truth the ter...</p>

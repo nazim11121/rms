@@ -80,27 +80,33 @@ class LaundryController extends Controller
      */
     public function edit($id)
     {
-        $data = Laundry::find($id);
+        $laundry = Laundry::find($id);
 
         $amenitiesList = Amenities::where('status', 1)->get();
         $vendorList = Vendor::where('status', 1)->get();
+        $amenities = json_decode($laundry->amenities_id, true); // ["2","3"]
+        $quantities = json_decode($laundry->quantity, true);    // ["2","1"]
 
-        return view('admin.laundry.edit',compact(['data','amenitiesList','vendorList']));
+        foreach ($amenities as $index => $amenityId) {
+            $qty = $quantities[$index];
+            echo "Amenity ID: $amenityId | Quantity: $qty <br>";
+        }
+
+        return view('admin.laundry.edit',compact(['laundry','amenitiesList','vendorList']));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Laundry $laundry, $id)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
+            'amenities_id' => 'required',
             'room_no' => 'nullable',
             'vendor_id' => 'nullable',
             'description' => 'nullable',
-            'date' => 'nullable',
-            'laundry_item' => 'nullable',
+            'assign_date' => 'nullable',
             'quantity' => 'nullable',
-            'status' => 'required',
         ]);
  
         if ($validator->fails()) {
@@ -110,13 +116,20 @@ class LaundryController extends Controller
         }
 
         $validatedData = $validator->validated();
-        $validatedData['anemities_id'] = json_encode($request->amenities_id);
-        $validatedData['quantity'] = json_encode($request->quantity);
-        $validatedData['updated_by'] = Auth::id();
+         // Find the laundry record
+        $laundry = Laundry::findOrFail($id);
 
-        $dataUpdate = Laundry::where('id', $id)->update($validatedData);
+        // Save updates
+        $laundry->room_no      = $request->room_no;
+        $laundry->assign_date  = $request->assign_date;
+        $laundry->vendor_id    = $request->vendor_id;
+        $laundry->amenities_id = json_encode($request->amenities_id);
+        $laundry->quantity     = json_encode($request->quantity);
+        $laundry->updated_by   = auth()->id();
 
-        if($dataUpdate){
+        $laundry->save();
+
+        if($laundry){
             return redirect()->route('admin.laundry.index')->with('info', 'Data Updated Successful.');
         }else{
             return redirect()->route('admin.laundry.edit')->with('error', 'Data Update Failed.');

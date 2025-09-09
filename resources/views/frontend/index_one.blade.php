@@ -870,21 +870,22 @@
     <div class="container">
         <h2 class="mb-4 text-center">Featured Videos</h2>
 
-        <div id="videoCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- <div id="videoCarousel" class="carousel slide" data-bs-ride="carousel"> -->
+        <div id="videoCarousel" class="carousel slide" data-bs-ride="false">
             <div class="carousel-inner">
 
                 <!-- Slide 1: YouTube -->
-                <div class="carousel-item active">
+                <!-- <div class="carousel-item active">
                     <div class="ratio ratio-16x9">
                         <iframe src="https://www.youtube.com/embed/Q9phP_kFQuc" title="Video 1" allowfullscreen></iframe>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Slide 2: Local video -->
-                <div class="carousel-item">
+                <div class="carousel-item active">
                     <div class="ratio ratio-16x9">
-                        <video controls>
-                            <source src="{{ asset('videos/your-video.mp4') }}" type="video/mp4">
+                        <video controls autoplay muted>
+                            <source src="{{ asset('uploads/video1.mp4') }}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
@@ -1019,4 +1020,23 @@
       <i class="fas fa-angle-up"></i>
     </a>
   </div>
+<!-- Load jQuery first -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Then Bootstrap JS or your custom scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('js/custom.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        $('#videoCarousel').on('slid.bs.carousel', function () {
+            $(this).find('video').each(function () {
+                this.pause(); // pause all videos
+            });
+            let activeVideo = $(this).find('.carousel-item.active video').get(0);
+            if (activeVideo) {
+                activeVideo.play(); // play only the active one
+            }
+        });
+    });
+</script>
 @endsection

@@ -9,7 +9,7 @@
                         <div class="logo-header" data-background-color="dark">
                         <a href="#" class="logo">
                             <img
-                            src="{{ asset('assets/img/kaiadmin/logo_light.svg')}}"
+                            src="{{ asset('uploads/frontend/logo.jpg')}}"
                             alt="navbar brand"
                             class="navbar-brand"
                             height="20"
@@ -33,9 +33,9 @@
                     <nav
                         class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
                         <div class="container-fluid">
-                        <nav
+                        <!-- <nav
                             class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
-                        >
+                            >
                             <div class="input-group">
                             <div class="input-group-prepend">
                                 <button type="submit" class="btn btn-search pe-1">
@@ -48,12 +48,12 @@
                                 class="form-control"
                             />
                             </div>
-                        </nav>
+                        </nav> -->
 
                         <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
-                            <li
-                            class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
-                            >
+                            <!-- <li
+                                class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
+                                >
                             <a
                                 class="nav-link dropdown-toggle"
                                 data-bs-toggle="dropdown"
@@ -63,8 +63,8 @@
                                 aria-haspopup="true"
                             >
                                 <i class="fa fa-search"></i>
-                            </a>
-                            <ul class="dropdown-menu dropdown-search animated fadeIn">
+                            </a> -->
+                            <!-- <ul class="dropdown-menu dropdown-search animated fadeIn">
                                 <form class="navbar-left navbar-form nav-search">
                                 <div class="input-group">
                                     <input
@@ -74,24 +74,24 @@
                                     />
                                 </div>
                                 </form>
-                            </ul>
+                            </ul> -->
                             </li>
-                            <li class="nav-item topbar-icon dropdown hidden-caret">
-                            <a
-                                class="nav-link dropdown-toggle"
-                                href="#"
-                                id="messageDropdown"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                            >
-                                <i class="fa fa-envelope"></i>
-                            </a>
+                            <!-- <li class="nav-item topbar-icon dropdown hidden-caret">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    id="messageDropdown"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    <i class="fa fa-envelope"></i>
+                                </a>
                             <ul
                                 class="dropdown-menu messages-notif-box animated fadeIn"
                                 aria-labelledby="messageDropdown"
-                            >
+                                >
                                 <li>
                                 <div
                                     class="dropdown-title d-flex justify-content-between align-items-center"
@@ -166,8 +166,8 @@
                                 </a>
                                 </li>
                             </ul>
-                            </li>
-                            <li class="nav-item topbar-icon dropdown hidden-caret">
+                            </li> -->
+                            <!-- <li class="nav-item topbar-icon dropdown hidden-caret">
                             <a
                                 class="nav-link dropdown-toggle"
                                 href="#"
@@ -183,7 +183,7 @@
                             <ul
                                 class="dropdown-menu notif-box animated fadeIn"
                                 aria-labelledby="notifDropdown"
-                            >
+                             >
                                 <li>
                                 <div class="dropdown-title">
                                     You have 4 new notification
@@ -244,8 +244,8 @@
                                 </a>
                                 </li>
                             </ul>
-                            </li>
-                            <li class="nav-item topbar-icon dropdown hidden-caret">
+                            </li> -->
+                            <!-- <li class="nav-item topbar-icon dropdown hidden-caret">
                             <a
                                 class="nav-link"
                                 data-bs-toggle="dropdown"
@@ -322,7 +322,7 @@
                                 </div>
                                 </div>
                             </div>
-                            </li>
+                            </li> -->
 
                             <li class="nav-item topbar-user dropdown hidden-caret">
                             <a
@@ -343,7 +343,7 @@
                                 <span class="fw-bold">Hizrian</span>
                                 </span>
                             </a>
-                            <ul class="dropdown-menu dropdown-user animated fadeIn">
+                            <!-- <ul class="dropdown-menu dropdown-user animated fadeIn">
                                 <div class="dropdown-user-scroll scrollbar-outer">
                                 <li>
                                     <div class="user-box">
@@ -376,7 +376,7 @@
                                     <a class="dropdown-item" href="#">Logout</a>
                                 </li>
                                 </div>
-                            </ul>
+                            </ul> -->
                             </li>
                         </ul>
                         </div>

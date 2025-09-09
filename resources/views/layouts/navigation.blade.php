@@ -3,13 +3,14 @@
         <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
-            <a href="index.html" class="logo">
+            <a href="#" class="logo">
               <img
-                src="{{asset('assets/img/kaiadmin/logo_light.svg')}}"
+                src="{{asset('uploads/frontend/logo.jpg')}}"
                 alt="navbar brand"
                 class="navbar-brand"
                 height="20"
               />
+              <h5 class="mx-3 mt-3 text-white">Bornomala</h5>
             </a>
             <div class="nav-toggle">
               <button class="btn btn-toggle toggle-sidebar">
