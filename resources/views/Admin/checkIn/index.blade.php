@@ -50,6 +50,7 @@
                       >
                         <thead>
                           <tr>
+                            <th>SL</th>
                             <th>Name</th>
                             <th>Total Guest</th>
                             <th>Room No.</th>
@@ -71,6 +72,7 @@
                         <tbody>
                           @foreach($allData as $key=>$value)
                             <tr>
+                              <td>{{$key+1}}</td>
                               <td>{{$value->name}}</br>{{$value->mobile}}</td>
                               <td>Adults: {{$value->adult}}</br>Kids: {{$value->kids}}</td>
                               <td>

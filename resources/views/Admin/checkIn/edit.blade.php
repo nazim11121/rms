@@ -91,10 +91,13 @@
                                                 <tbody>
                                                     @foreach($roomType->rooms as $room)
                                                         <tr>
-                                                            <td><input type="checkbox" name="room_id[]" value="{{ $room->id }}"></td>
+                                                            <td><input type="checkbox" name="room_id[]" value="{{ $room->id }}" 
+                                                                {{ in_array($room->id, $selectedRooms ?? []) ? 'checked' : '' }}
+                                                                {{ $room->available_status == 1 && !in_array($room->id, $selectedRooms ?? []) ? 'disabled' : '' }}>
+                                                            </td>
                                                             <td>{{ $room->room_no }}</td>
                                                             <td>
-                                                                @if($room->status == 1)
+                                                                @if($room->available_status == 1)
                                                                     <span class="badge bg-secondary">Booked</span>
                                                                 @else
                                                                     <span class="badge bg-success">Available</span>
@@ -158,9 +161,19 @@
                                         <div class="row g-3 mt-2">
                                             <div class="col-md-4">
                                                 <label class="form-label">Document</label>
-                                                <input type="file" class="form-control" name="file" id="file">
+                                                <input type="file" class="form-control" name="file" id="file" accept="image/*">
+
+                                                {{-- Preview Section --}}
+                                                <div class="mt-2">
+                                                    <img id="preview" 
+                                                        src="{{ $data->file ? asset('/' . $data->file) : 'https://via.placeholder.com/150x100?text=No+Image' }}" 
+                                                        alt="Document Preview" 
+                                                        class="img-thumbnail" 
+                                                        width="150">
+                                                </div>
                                             </div>
                                         </div>
+
                                         <button type="submit" class="btn btn-primary mt-3">Update</button>
                                     </div>
                                 </div>
@@ -171,4 +184,50 @@
             </div>
         </div>
     </div>
+    <!-- Include jQuery -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    document.getElementById('file').addEventListener('change', function(event) {
+        let preview = document.getElementById('preview');
+        let file = event.target.files[0];
+
+        if (file) {
+            // only preview image files
+            if (file.type.startsWith('image/')) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            } else {
+                // if not image, show placeholder
+                preview.src = "https://via.placeholder.com/150x100?text=File+Not+Image";
+            }
+        }
+    });
+</script>
+<script>
+  $(document).ready(function () {console.log('hi');
+      function calculateDuration() {
+          let checkIn = new Date($('#start_date').val());
+          let checkOut = new Date($('#end_date').val());
+          
+          if (checkIn && checkOut) {
+              let timeDiff = checkOut.getTime() - checkIn.getTime();
+              let daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)); // Convert milliseconds to days
+              console.log('hi');
+              if (daysDiff > 0) {
+                  $('#day').val(daysDiff);
+              } else {
+                  $('#day').val(0); // Prevent negative values
+              }
+          }
+      }
+
+      // Trigger calculation on date change
+      $('#start_date, #end_date').on('change', function () {
+          calculateDuration();
+      });
+  });
+</script>
 @endsection

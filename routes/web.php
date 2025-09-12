@@ -68,6 +68,7 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::get('/checkIn/page2/create/{id}', [CheckInController::class, 'page2Create'])->name('checkIn.page2.create');
     Route::post('/checkIn/page2/store', [CheckInController::class, 'page2Store'])->name('checkIn.page2.store');
     Route::get('/checkOut/create/{id}', [CheckInController::class, 'checkoutPage'])->name('checkout.create');
+    Route::match(['PUT','PATCH'],'/checkOut/update/{id}', [CheckInController::class, 'getCheckoutInfo'])->name('checkout.update');
     Route::resource('/house-keeping', HouseKeepingController::class);
     Route::resource('/laundry', LaundryController::class);
     Route::resource('/vendors', VendorController::class);

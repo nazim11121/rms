@@ -14,4 +14,9 @@ class CheckIn extends Model
     {
         return $this->belongsTo(Room::class, 'room_id', 'id');
     }
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class, 'id');
+    }
 }

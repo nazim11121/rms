@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('priority')->nullable()->index();
             $table->text('description')->nullable();
             $table->string('image', 191)->nullable();
+            $table->boolean('available_status')->default(0)->comment('1=booked,0=available');
             $table->boolean('status')->default(1)->comment('1=active,0=inactive');
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

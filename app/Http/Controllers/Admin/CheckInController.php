@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Admin\CheckIn;
+use App\Models\Admin\Checkout;
 use App\Models\Admin\RoomType;
+use App\Models\Admin\Room;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -94,7 +96,7 @@ class CheckInController extends Controller
 
         $validatedData = $validator->validated();
         $validatedData['file'] = $imagePath;
-        $validatedData['status'] = 1;
+        $validatedData['available_status'] = 1;
         $validatedData['created_by'] = Auth::id();
         $dataStore = CheckIn::where('id', $request->booking_id)->update($validatedData);
 
@@ -119,14 +121,15 @@ class CheckInController extends Controller
     public function edit($id)
     {
         $data = CheckIn::find($id);
+        $selectedRooms = json_decode($data->room_id); 
         $roomList = RoomType::with('rooms')->where('status', 1)->get();
-        return view('admin.checkIn.edit',compact(['data','roomList']));
+        return view('admin.checkIn.edit',compact(['data','selectedRooms','roomList']));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CheckIn $checkIn, $id)
+    public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'start_date' => 'required',
@@ -191,6 +194,76 @@ class CheckInController extends Controller
     public function checkoutPage($id){
 
         $data = CheckIn::find($id);
-        return view('admin.checkOut.create',compact('data'));
+        $roomList = RoomType::with('rooms')->where('status', 1)->get();
+        $selectedRooms = json_decode($data->room_id, true);
+        $rooms = Room::whereIn('id', $selectedRooms)->get();
+
+        return view('admin.checkOut.create',compact('data','roomList','rooms','selectedRooms'));
+    }
+
+    public function getCheckoutInfo(Request $request, $id){
+
+        $validator = Validator::make($request->all(), [
+            'booking_id' => 'required',
+            'room_cost' => 'required',
+            'laundry_cost' => 'nullable',
+            'food_cost' => 'nullable',
+            'service_cost' => 'nullable',
+            'other_cost' => 'nullable',
+            'subtotal' => 'required',
+            'vat' => 'nullable',
+            'discount_type' => 'nullable',
+            'discount' => 'nullable',
+            'grand_total' => 'required',
+            'advanced' => 'nullable',
+            'due' => 'nullable',
+            'payment_method' => 'required',
+            'transaction_id' => 'nullable',
+            'note' => 'nullable',
+        ]);
+ 
+        if ($validator->fails()) {
+            return redirect('checkOut/create/'.$request->booking_id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $validatedData = $validator->validated();
+
+        $checkoutData = new Checkout();
+        $checkoutData->checkout_date = date('Y-m-d');
+        $checkoutData->booking_id = $request->booking_id;
+        $checkoutData->room_cost = $request->room_cost;
+        $checkoutData->laundry_cost = $request->laundry_cost;
+        $checkoutData->food_cost = $request->food_cost;
+        $checkoutData->service_cost = $request->service_cost;
+        $checkoutData->other_cost = $request->other_cost;
+        $checkoutData->subtotal = $request->subtotal;
+        $checkoutData->vat = $request->vat;
+        $checkoutData->discount_type = $request->discount_type;
+        $checkoutData->discount = $request->discount;
+        $checkoutData->grand_total = $request->grand_total;
+        $checkoutData->advanced = $request->advanced;
+        $checkoutData->due = $request->due;
+        $checkoutData->payment_method = $request->payment_method;
+        $checkoutData->transaction_id = $request->transaction_id;
+        $checkoutData->payment_status = 1;
+        $checkoutData->note = $request->note;
+        $checkoutData->created_by = Auth::id();
+        $checkoutData->save();
+
+        $checkInData = CheckIn::where('id', $request->booking_id)->first();
+        $checkInData['checkout_id'] = $checkoutData->id;
+        $checkInData->save();
+
+        $rooms = json_decode($checkInData->room_id, true);
+        Room::whereIn('id', $rooms)->update(['available_status' => 0]);
+
+        if($checkoutData){
+            return redirect()->route('admin.checkIn.index')->with('success', 'Check Out Successful.');
+        }else{
+            return redirect()->route('admin.checkOut.create', $request->booking_id)->with('error', 'Check Out Failed.');
+        }
+
     }
 }

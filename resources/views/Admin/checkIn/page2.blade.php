@@ -55,10 +55,10 @@
                                                 <tbody>
                                                     @foreach($roomType->rooms as $room)
                                                         <tr>
-                                                            <td><input type="checkbox" name="room_id[]" value="{{ $room->id }}"></td>
+                                                            <td><input type="checkbox" name="room_id[]" value="{{ $room->id }}" {{$room->available_status == 1 ? 'disabled':''}}></td>
                                                             <td>{{ $room->room_no }}</td>
                                                             <td>
-                                                                @if($room->status == 1)
+                                                                @if($room->available_status == 1)
                                                                     <span class="badge bg-secondary">Booked</span>
                                                                 @else
                                                                     <span class="badge bg-success">Available</span>
