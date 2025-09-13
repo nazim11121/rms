@@ -75,6 +75,21 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="card mt-4">
+                                    <div class="card-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Select Package</label>
+                                                <select class="form-control" name="package_id" id="package_id">
+                                                    <option value="">--Select--</option>
+                                                    @foreach($packageList as $package)
+                                                        <option value="{{ $package->id }}" {{$package->id==$data->package_id ? 'selected':''}}>{{ $package->name }} - {{ $package->price }}.00</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- Room Selection Section -->
                                 @foreach($roomList as $roomType)
                                     <div class="card mt-4">

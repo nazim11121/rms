@@ -9,4 +9,9 @@ class Checkout extends Model
 {
     use SoftDeletes;
     protected $guarded = [];
+
+    public function checkIn()
+    {
+        return $this->belongsTo(CheckIn::class, 'id', 'checkout_id');
+    }
 }

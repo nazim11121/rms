@@ -8,6 +8,7 @@ use App\Models\Admin\CheckIn;
 use App\Models\Admin\Checkout;
 use App\Models\Admin\RoomType;
 use App\Models\Admin\Room;
+use App\Models\Admin\Package;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -18,8 +19,14 @@ class CheckInController extends Controller
      */
     public function index()
     {
-        $allData =  CheckIn::with('room')->orderBy('id', 'DESC')->get();
+        $allData =  CheckIn::with('room')->where('checkout_id',null)->orderBy('id', 'DESC')->get();
         return view('admin.checkIn.index',compact('allData'));
+    }
+
+    public function checkoutList()
+    {
+        $allData =  CheckIn::with('room','checkout')->where('checkout_id','!=',null)->orderBy('id', 'DESC')->get();
+        return view('admin.checkout.index',compact('allData'));
     }
 
     /**
@@ -64,12 +71,15 @@ class CheckInController extends Controller
     public function page2Create($id){
 
         $roomList = RoomType::with('rooms')->where('status', 1)->get();
-        return view('admin.checkIn.page2',compact(['roomList','id']));
+        $packageList = Package::where('status', 1)->get();
+
+        return view('admin.checkIn.page2',compact(['roomList','id','packageList']));
     }
 
     public function page2Store(Request $request){
 
         $validator = Validator::make($request->all(), [
+            'package_id' => 'nullable',
             'room_id' => 'required',
             'name' => 'required',
             'mobile' => 'required',
@@ -92,13 +102,20 @@ class CheckInController extends Controller
             $profile = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads/documents'), $profile);
             $imagePath = 'uploads/documents/' .$profile;
+        }else{
+            $imagePath = null;
         }
 
         $validatedData = $validator->validated();
         $validatedData['file'] = $imagePath;
-        $validatedData['available_status'] = 1;
+        $validatedData['status'] = 1;
         $validatedData['created_by'] = Auth::id();
         $dataStore = CheckIn::where('id', $request->booking_id)->update($validatedData);
+
+        $storeData = CheckIn::where('id', $request->booking_id)->first();
+
+        $rooms = json_decode($storeData->room_id, true);
+        Room::whereIn('id', $rooms)->update(['available_status' => 1]);
 
         if($dataStore){
             return redirect()->route('admin.checkIn.index')->with('success', 'Data Store Successful.');
@@ -123,7 +140,9 @@ class CheckInController extends Controller
         $data = CheckIn::find($id);
         $selectedRooms = json_decode($data->room_id); 
         $roomList = RoomType::with('rooms')->where('status', 1)->get();
-        return view('admin.checkIn.edit',compact(['data','selectedRooms','roomList']));
+        $packageList = Package::where('status', 1)->get();
+
+        return view('admin.checkIn.edit',compact(['data','selectedRooms','roomList','packageList']));
     }
 
     /**
@@ -137,6 +156,7 @@ class CheckInController extends Controller
             'day' => 'required',
             'adult' => 'required',
             'kids' => 'nullable',
+            'package_id' => 'nullable',
             'room_id' => 'required',
             'name' => 'required',
             'mobile' => 'required',
@@ -163,11 +183,21 @@ class CheckInController extends Controller
             $imagePath = CheckIn::where('id', $id)->first()->file;
         }
 
+        $storeData = CheckIn::where('id', $request->booking_id)->first();
+
+        $rooms = json_decode($storeData->room_id, true);
+        Room::whereIn('id', $rooms)->update(['available_status' => 0]);
+
         $validatedData = $validator->validated();
         $validatedData['file'] = $imagePath;
         $validatedData['updated_by'] = Auth::id();
 
         $dataUpdate = CheckIn::where('id', $id)->update($validatedData);
+
+        $storeData = CheckIn::where('id', $request->booking_id)->first();
+
+        $rooms = json_decode($storeData->room_id, true);
+        Room::whereIn('id', $rooms)->update(['available_status' => 1]);
 
         if($dataUpdate){
             return redirect()->route('admin.checkIn.index')->with('info', 'Data Updated Successful.');
@@ -194,11 +224,26 @@ class CheckInController extends Controller
     public function checkoutPage($id){
 
         $data = CheckIn::find($id);
+        $checkoutData = Checkout::find($data->checkout_id ?? '');
+
         $roomList = RoomType::with('rooms')->where('status', 1)->get();
         $selectedRooms = json_decode($data->room_id, true);
         $rooms = Room::whereIn('id', $selectedRooms)->get();
 
-        return view('admin.checkOut.create',compact('data','roomList','rooms','selectedRooms'));
+        $selectedRoomIds = json_decode($data->room_id, true) ?? [];
+
+        $selectedALlRooms = Room::with('roomType')->whereIn('id', $selectedRoomIds)->get();
+
+        $roomCost = 0;
+        if (is_null($data->package_id)) {
+            foreach ($selectedALlRooms as $room) {
+                $roomCost += ($room->roomType->base_price ?? 0) * $data->day;
+            }
+        }else{
+            $roomCost = Package::where('id',$data->package_id)->get()->pluck('price')->first();
+        }
+
+        return view('admin.checkOut.create',compact('data','checkoutData','roomList','rooms','selectedRooms','roomCost'));
     }
 
     public function getCheckoutInfo(Request $request, $id){
@@ -264,6 +309,15 @@ class CheckInController extends Controller
         }else{
             return redirect()->route('admin.checkOut.create', $request->booking_id)->with('error', 'Check Out Failed.');
         }
+
+    }
+
+    public function checkoutView($id){
+        $allData = CheckIn::with(['checkout', 'package'])->findOrFail($id);
+        $roomIds = json_decode($allData->room_id, true);
+        $rooms   = Room::with('roomType')->whereIn('id', $roomIds)->get();
+
+        return view('admin.checkout.invoice', compact('allData', 'rooms'));
 
     }
 }

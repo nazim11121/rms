@@ -13,13 +13,13 @@
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Check In</a>
+                  <a href="#">Booking Management</a>
                 </li>
                 <li class="separator">
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Booking</a>
+                  <a href="#">Check</a>
                 </li>
                 <li class="nav-item">
                   <a href="#">List</a>
@@ -31,7 +31,7 @@
                 <div class="card">
                   <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                      <h4 class="card-title float-left">Booking List</h4>
+                      <h4 class="card-title float-left">Checkout List</h4>
                       <a
                           href="{{route('admin.checkIn.create')}}"
                                 type="button"
@@ -50,6 +50,7 @@
                       >
                         <thead>
                           <tr>
+                            <th>SL</th>
                             <th>Name</th>
                             <th>Total Guest</th>
                             <th>Room No.</th>
@@ -71,6 +72,7 @@
                         <tbody>
                           @foreach($allData as $key=>$value)
                             <tr>
+                              <td>{{$key+1}}</td>
                               <td>{{$value->name}}</br>{{$value->mobile}}</td>
                               <td>Adults: {{$value->adult}}</br>Kids: {{$value->kids}}</td>
                               <td>
@@ -81,14 +83,14 @@
                                   {{implode(', ', $roomNumbers)}}
                               </td>
                               <td>{{ date('d-m-Y', strtotime($value->start_date))}} to {{ date('d-m-Y', strtotime($value->end_date))}}</td>
-                              <td>@if($value->status==1) <span>Booked</span>@else<span>Incomplete</span>@endif</td>
+                              <td>@if($value->checkout_id!==null) <span class="badge badge-danger">Checkout</span>@elseif($value->status==1) <span class="badge badge-primary">Booked</span> @else<span>Incomplete</span>@endif</td>
                               <td class="text-nowrap">
-                                  <a href="{{route('admin.checkIn.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                                  <a href="{{route('admin.checkout.create', $value->id)}}" class="btn btn-info btn-xs"><i class="fa fa-view"></i> Checkout</a>
+                                  <a href="{{route('admin.checkout.view', $value->id)}}" class="btn btn-info btn-xs"><i class="fa fa-eye"></i> View</a>
+                                  <a href="{{route('admin.checkout.create', $value->id)}}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a>
                                   <form action="{{ route('admin.checkIn.destroy', $value->id) }}" method="POST" style="display: inline-block;">
                                       @csrf
                                       @method('DELETE')
-                                      <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this?')">
+                                      <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this?')" @if($value->checkout_id!=null) disabled @endif>
                                           <i class="fa fa-trash"></i> Cancel
                                       </button>
                                   </form>

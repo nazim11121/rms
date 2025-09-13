@@ -39,6 +39,21 @@
                             <form method="POST" action="{{ route('admin.checkIn.page2.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="booking_id" value="{{ $id }}">
+                                <div class="card mt-4">
+                                    <div class="card-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Select Package</label>
+                                                <select class="form-control" name="package_id" id="package_id">
+                                                    <option value="">--Select--</option>
+                                                    @foreach($packageList as $package)
+                                                        <option value="{{ $package->id }}">{{ $package->name }} - {{ $package->price }}.00</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- Room Selection Section -->
                                 @foreach($roomList as $roomType)
                                     <div class="card mt-4">
@@ -85,11 +100,11 @@
                                         <form>
                                             <div class="row g-3">
                                                 <div class="col-md-4">
-                                                    <label class="form-label">Full Name *</label>
+                                                    <label class="form-label">Full Name <span class="requiredStar">*</span></label>
                                                     <input type="text" class="form-control" name="name" id="name" placeholder="Enter First Name" required>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <label class="form-label">Mobile No. *</label>
+                                                    <label class="form-label">Mobile No. <span class="requiredStar">*</span></label>
                                                     <input type="text" class="form-control" name="mobile" id="mobile" placeholder="Enter Mobile No." required>
                                                 </div>
                                                 <div class="col-md-4">
@@ -103,7 +118,7 @@
                                                     <input type="number" class="form-control" name="age" id="age" placeholder="Enter Age">
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <label class="form-label">Gender *</label>
+                                                    <label class="form-label">Gender <span class="requiredStar">*</span></label>
                                                     <select class="form-control" name="gender" id="gender" required>
                                                         <option value="">--Select--</option>
                                                         <option value="Male">Male</option>
@@ -112,12 +127,12 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <label class="form-label">Address *</label>
+                                                    <label class="form-label">Address <span class="requiredStar">*</span></label>
                                                     <input type="text" class="form-control" name="address" id="address" placeholder="Enter Address" required>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    <label class="form-label">NID No. *</label>
-                                                    <input type="number" class="form-control" name="nid_no" id="nid_no">
+                                                    <label class="form-label">NID No. <span class="requiredStar">*</span></label>
+                                                    <input type="number" class="form-control" name="nid_no" id="nid_no" required>
                                                 </div>
                                             </div>
                                             <div class="row g-3 mt-2">

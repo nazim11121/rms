@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\PackageCategoryController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\ReportController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
@@ -69,6 +70,8 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::post('/checkIn/page2/store', [CheckInController::class, 'page2Store'])->name('checkIn.page2.store');
     Route::get('/checkOut/create/{id}', [CheckInController::class, 'checkoutPage'])->name('checkout.create');
     Route::match(['PUT','PATCH'],'/checkOut/update/{id}', [CheckInController::class, 'getCheckoutInfo'])->name('checkout.update');
+    Route::get('/checkout/list', [CheckInController::class, 'checkoutList'])->name('checkout.list');
+    Route::get('/checkout/view/{id}', [CheckInController::class, 'checkoutView'])->name('checkout.view');
     Route::resource('/house-keeping', HouseKeepingController::class);
     Route::resource('/laundry', LaundryController::class);
     Route::resource('/vendors', VendorController::class);
@@ -78,6 +81,7 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::get('/package/details/{id}', [PackageController::class, 'create'])->name('package.details');
     Route::resource('/package-category', PackageCategoryController::class);
     Route::resource('/slider', SliderController::class);
+    Route::get('/report/income', [ReportController::class, 'index'])->name('report.income');
     
 });
 

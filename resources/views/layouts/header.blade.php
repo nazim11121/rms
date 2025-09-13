@@ -29,6 +29,15 @@
                 },
             });
         </script>
+        <style>
+            .requiredStar {
+                color: red;
+            }
+            a.disabled {
+                pointer-events: none;
+                opacity: 0.6;
+            }
+        </style>
 
         <!-- CSS Files -->
         <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" />

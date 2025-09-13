@@ -60,6 +60,11 @@
                                   <span class="sub-item">CheckIn List</span>
                               </a>
                           </li>
+                          <li class="{{ Request::routeIs(['admin.checkout.list','admin.checkIn.create']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.checkout.list') }}">
+                                  <span class="sub-item">CheckOut List</span>
+                              </a>
+                          </li>
                       </ul>
                   </div>
               </li>
@@ -158,6 +163,23 @@
                           <li class="{{ Request::routeIs(['admin.vendors.index','admin.vendors.create','admin.vendors.edit']) ? 'active' : '' }}">
                               <a href="{{ route('admin.vendors.index') }}">
                                   <span class="sub-item">All</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+
+              <li class="nav-item {{ Request::is('reports*') ? 'active' : '' }}">
+                  <a data-bs-toggle="collapse" href="#reports" aria-expanded="{{ Request::is('reports*') ? 'true' : 'false' }}">
+                      <i class="fas fa-layer-group"></i>
+                      <p>Report</p>
+                      <span class="caret"></span>
+                  </a>
+                  <div class="collapse {{ Request::is(['reports*','admin.report.index']) ? 'show' : '' }}" id="reports">
+                      <ul class="nav nav-collapse">
+                          <li class="{{ Request::routeIs(['admin.report.income']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.report.income') }}">
+                                  <span class="sub-item">Income</span>
                               </a>
                           </li>
                       </ul>

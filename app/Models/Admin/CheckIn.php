@@ -19,4 +19,14 @@ class CheckIn extends Model
     {
         return $this->hasMany(Room::class, 'id');
     }
+
+    public function checkout()
+    {
+        return $this->belongsTo(Checkout::class, 'checkout_id', 'id');
+    }
+
+    public function package()
+    {
+        return $this->belongsTo(Package::class, 'package_id', 'id');
+    }
 }

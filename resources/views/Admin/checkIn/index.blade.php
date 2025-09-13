@@ -83,14 +83,18 @@
                                   {{implode(', ', $roomNumbers)}}
                               </td>
                               <td>{{ date('d-m-Y', strtotime($value->start_date))}} to {{ date('d-m-Y', strtotime($value->end_date))}}</td>
-                              <td>@if($value->status==1) <span>Booked</span>@else<span>Incomplete</span>@endif</td>
+                              <td>@if($value->checkout_id!==null) <span class="badge badge-danger">Checkout</span>@elseif($value->status==1) <span class="badge badge-primary">Booked</span> @else<span>Incomplete</span>@endif</td>
                               <td class="text-nowrap">
-                                  <a href="{{route('admin.checkIn.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
+                                  <a href="{{ $value->checkout_id == null ? route('admin.checkIn.edit', $value->id) : '#' }}"
+                                    class="btn btn-primary btn-xs {{ $value->checkout_id != null ? 'disabled' : '' }}"
+                                    @if($value->checkout_id != null) onclick="return false;" @endif>
+                                    <i class="fa fa-edit"></i> Edit
+                                  </a>
                                   <a href="{{route('admin.checkout.create', $value->id)}}" class="btn btn-info btn-xs"><i class="fa fa-view"></i> Checkout</a>
                                   <form action="{{ route('admin.checkIn.destroy', $value->id) }}" method="POST" style="display: inline-block;">
                                       @csrf
                                       @method('DELETE')
-                                      <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this?')">
+                                      <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this?')" @if($value->checkout_id!=null) disabled @endif>
                                           <i class="fa fa-trash"></i> Cancel
                                       </button>
                                   </form>

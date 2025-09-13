@@ -13,7 +13,7 @@
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Check In</a>
+                  <a href="#">Check Out</a>
                 </li>
                 <li class="separator">
                   <i class="icon-arrow-right"></i>
@@ -25,7 +25,7 @@
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Edit</a>
+                  <a href="#">Store</a>
                 </li>
               </ul>
             </div>
@@ -90,39 +90,38 @@
                                 <div class="card mt-4">
     <div class="card-body">
         <h5 class="mb-3">Billing Information</h5>
-
         <div class="row mb-2">
-            <label class="col-md-6 col-form-label fw-bold">Room Cost</label>
+            <label class="col-md-6 col-form-label fw-bold">Room/Package Cost</label>
             <div class="col-md-6">
-                <input type="number" step="0.01" class="form-control cost" name="room_cost" id="room_cost" value="5000">
+                <input type="number" step="0.01" class="form-control cost" name="room_cost" id="room_cost" value="{{$checkoutData ? $checkoutData->room_cost:$roomCast}}">
             </div>
         </div>
 
         <div class="row mb-2">
             <label class="col-md-6 col-form-label fw-bold">Laundry Cost</label>
             <div class="col-md-6">
-                <input type="number" step="0.01" class="form-control cost" name="laundry_cost" id="laundry_cost" value="0.00">
+                <input type="number" step="0.01" class="form-control cost" name="laundry_cost" id="laundry_cost" value="{{$checkoutData ? $checkoutData->laundry_cost:0.00}}">
             </div>
         </div>
 
         <div class="row mb-2">
             <label class="col-md-6 col-form-label fw-bold">Food Cost</label>
             <div class="col-md-6">
-                <input type="number" step="0.01" class="form-control cost" name="food_cost" id="food_cost" value="0.00">
+                <input type="number" step="0.01" class="form-control cost" name="food_cost" id="food_cost" value="{{$checkoutData ? $checkoutData->food_cost:0.00}}">
             </div>
         </div>
 
         <div class="row mb-2">
             <label class="col-md-6 col-form-label fw-bold">Service Cost</label>
             <div class="col-md-6">
-                <input type="number" step="0.01" class="form-control cost" name="service_cost" id="service_cost" value="0.00">
+                <input type="number" step="0.01" class="form-control cost" name="service_cost" id="service_cost" value="{{$checkoutData ? $checkoutData->service_cost:0.00}}">
             </div>
         </div>
 
         <div class="row mb-2">
             <label class="col-md-6 col-form-label fw-bold">Other Cost</label>
             <div class="col-md-6">
-                <input type="number" step="0.01" class="form-control cost" name="other_cost" id="other_cost" value="0.00">
+                <input type="number" step="0.01" class="form-control cost" name="other_cost" id="other_cost" value="{{$checkoutData ? $checkoutData->other_cost:0.00}}">
             </div>
         </div>
 
@@ -138,7 +137,7 @@
         <div class="row mb-2">
             <label class="col-md-6 col-form-label fw-bold">VAT (%)</label>
             <div class="col-md-6">
-                <input type="number" step="0.01" class="form-control" id="vat" name="vat" value="0">
+                <input type="number" step="0.01" class="form-control" id="vat" name="vat" value="{{$checkoutData ? $checkoutData->vat:0}}">
             </div>
         </div>
 
@@ -146,8 +145,8 @@
             <label class="col-md-6 col-form-label fw-bold">Discount Type</label>
             <div class="col-md-6">
                 <select class="form-control" id="discount_type" name="discount_type">
-                    <option value="percent">Percentage (%)</option>
-                    <option value="amount">Flat Amount</option>
+                    <option value="percent"{{$checkoutData->discount_type=='percent' ? 'selected':''}}>Percentage (%)</option>
+                    <option value="amount"{{$checkoutData->discount_type=='amount' ? 'selected':''}}>Flat Amount</option>
                 </select>
             </div>
         </div>
@@ -155,7 +154,7 @@
         <div class="row mb-2">
             <label class="col-md-6 col-form-label fw-bold">Discount</label>
             <div class="col-md-6">
-                <input type="number" step="0.01" class="form-control" id="discount" name="discount" value="0">
+                <input type="number" step="0.01" class="form-control" id="discount" name="discount" value="{{$checkoutData ? $checkoutData->vat:0}}">
             </div>
         </div>
 
@@ -173,12 +172,12 @@
     <div class="col-md-6">
         <select class="form-control" id="payment_method" name="payment_method" required>
             <option value="">-- Select Payment Method --</option>
-            <option value="cash">Cash</option>
-            <option value="bkash">Bkash</option>
-            <option value="rocket">Rocket</option>
-            <option value="nagad">Nagad</option>
-            <option value="card">Card</option>
-            <option value="bank">Bank Transfer</option>
+            <option value="cash"{{$checkoutData->payment_method=='cash' ? 'selected':''}}>Cash</option>
+            <option value="bkash"{{$checkoutData->payment_method=='bkash' ? 'selected':''}}>Bkash</option>
+            <option value="rocket"{{$checkoutData->payment_method=='rocket' ? 'selected':''}}>Rocket</option>
+            <option value="nagad"{{$checkoutData->payment_method=='nagad' ? 'selected':''}}>Nagad</option>
+            <option value="card"{{$checkoutData->payment_method=='card' ? 'selected':''}}>Card</option>
+            <option value="bank"{{$checkoutData->payment_method=='bank' ? 'selected':''}}>Bank Transfer</option>
         </select>
     </div>
 </div>
@@ -187,13 +186,14 @@
 <div class="row mb-2 d-none" id="transaction_row">
     <label class="col-md-6 col-form-label fw-bold" id="transaction_label">Transaction No</label>
     <div class="col-md-6">
-        <input type="text" class="form-control" id="transaction_id" name="transaction_id" placeholder="Enter transaction/reference no.">
+        <input type="text" class="form-control" id="transaction_id" name="transaction_id" placeholder="Enter transaction/reference no." value="{{$checkoutData ? $checkoutData->transaction_id:''}}">
     </div>
 </div>
-
-
-
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        @if($checkoutData)
+            <button type="submit" class="btn btn-primary mt-3">Update</button>
+        @else
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        @endif
     </div>
 </div>
 
