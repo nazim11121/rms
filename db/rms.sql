@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 12, 2025 at 07:35 PM
+-- Generation Time: Sep 13, 2025 at 06:14 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.3.6
 
@@ -146,14 +146,15 @@ CREATE TABLE IF NOT EXISTS `checkouts` (
   PRIMARY KEY (`id`),
   KEY `checkouts_checkout_date_index` (`checkout_date`),
   KEY `checkouts_booking_id_index` (`booking_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `checkouts`
 --
 
 INSERT INTO `checkouts` (`id`, `checkout_date`, `booking_id`, `room_cost`, `food_cost`, `laundry_cost`, `service_cost`, `other_cost`, `subtotal`, `discount`, `discount_type`, `vat`, `grand_total`, `advanced`, `due`, `payment_method`, `transaction_id`, `file`, `note`, `payment_status`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, '2025-09-12', 10, 5000.00, 0.00, 0.00, 500.00, 0.00, 5500.00, 10.00, 'percent', 5.00, 5225.00, NULL, NULL, 'cash', NULL, NULL, NULL, 1, 0, 1, NULL, '2025-09-12 13:33:34', '2025-09-12 13:33:34', NULL);
+(3, '2025-09-12', 10, 5000.00, 0.00, 0.00, 500.00, 0.00, 5500.00, 10.00, 'percent', 5.00, 5225.00, NULL, NULL, 'cash', NULL, NULL, NULL, 1, 0, 1, NULL, '2025-09-12 13:33:34', '2025-09-12 13:33:34', NULL),
+(4, '2025-09-13', 12, 20000.00, 0.00, 0.00, 0.00, 0.00, 20000.00, 0.00, 'percent', 0.00, 20000.00, NULL, NULL, 'bkash', '1234567897654', NULL, NULL, 1, 0, 1, NULL, '2025-09-13 07:21:06', '2025-09-13 07:21:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -165,6 +166,7 @@ DROP TABLE IF EXISTS `check_ins`;
 CREATE TABLE IF NOT EXISTS `check_ins` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `checkout_id` bigint UNSIGNED DEFAULT NULL,
+  `package_id` bigint UNSIGNED DEFAULT NULL,
   `start_date` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `end_date` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `day` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -212,17 +214,18 @@ CREATE TABLE IF NOT EXISTS `check_ins` (
   KEY `check_ins_phone2_index` (`phone2`),
   KEY `check_ins_email2_index` (`email2`),
   KEY `check_ins_file_index` (`file`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `check_ins`
 --
 
-INSERT INTO `check_ins` (`id`, `checkout_id`, `start_date`, `end_date`, `day`, `adult`, `kids`, `room_id`, `name`, `nid_no`, `address`, `mobile`, `phone`, `email`, `age`, `gender`, `name2`, `nid_no2`, `address2`, `mobile2`, `phone2`, `email2`, `file`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(9, NULL, '2025-03-03', '2025-03-13', '10', 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, NULL, '2025-03-01 04:16:34', '2025-09-12 07:07:16', '2025-09-12 07:07:16'),
-(6, NULL, '2025-03-01', '2025-03-02', '1', 2, 0, '[\"3\"]', 'Nazmul', '42536322', 'dhaka', '01778213931', NULL, 'dassa@gmail.com', 27, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '2025-03-01 03:29:01', '2025-03-01 03:29:41', NULL),
-(5, NULL, '2025-03-01', '2025-03-02', '1', 1, 0, '[\"2\",\"3\"]', 'Admin', '1234568345', 'Savar dhaka', '01778213123', NULL, 'drsazibbd27@gmail.com', 27, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '2025-03-01 02:18:08', '2025-03-01 02:25:22', NULL),
-(10, 3, '2025-09-12', '2025-09-14', '2', 2, 0, '[\"1\"]', 'Mr. Amanullah Aman', '1212343456', '12/12 Gulshan-1, Dhaka', '01700545600', NULL, NULL, 26, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/documents/1757694962.jpg', 1, 1, 1, '2025-09-12 07:11:18', '2025-09-12 13:33:34', NULL);
+INSERT INTO `check_ins` (`id`, `checkout_id`, `package_id`, `start_date`, `end_date`, `day`, `adult`, `kids`, `room_id`, `name`, `nid_no`, `address`, `mobile`, `phone`, `email`, `age`, `gender`, `name2`, `nid_no2`, `address2`, `mobile2`, `phone2`, `email2`, `file`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(9, NULL, NULL, '2025-03-03', '2025-03-13', '10', 2, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, NULL, '2025-03-01 04:16:34', '2025-09-12 07:07:16', '2025-09-12 07:07:16'),
+(6, NULL, NULL, '2025-03-01', '2025-03-02', '1', 2, 0, '[\"3\"]', 'Nazmul', '42536322', 'dhaka', '01778213931', NULL, 'dassa@gmail.com', 27, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '2025-03-01 03:29:01', '2025-03-01 03:29:41', NULL),
+(5, NULL, NULL, '2025-03-01', '2025-03-02', '1', 1, 0, '[\"2\",\"3\"]', 'Admin', '1234568345', 'Savar dhaka', '01778213123', NULL, 'drsazibbd27@gmail.com', 27, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '2025-03-01 02:18:08', '2025-03-01 02:25:22', NULL),
+(10, 3, NULL, '2025-09-12', '2025-09-14', '2', 2, 0, '[\"1\"]', 'Mr. Amanullah Aman', '1212343456', '12/12 Gulshan-1, Dhaka', '01700545600', NULL, NULL, 26, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, 'uploads/documents/1757694962.jpg', 1, 1, 1, '2025-09-12 07:11:18', '2025-09-12 13:33:34', NULL),
+(12, 4, 1, '2025-09-13', '2025-09-14', '1', 3, 0, '[\"1\"]', 'Mr. Asim Akram', '1223234323', '12/12 Mirpur-12, Dhaka', '01700545600', NULL, 'asim@gmail.com', NULL, 'Male', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, '2025-09-13 06:57:31', '2025-09-13 07:21:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -523,7 +526,7 @@ CREATE TABLE IF NOT EXISTS `rooms` (
 --
 
 INSERT INTO `rooms` (`id`, `type`, `name`, `room_no`, `floor`, `priority`, `description`, `image`, `available_status`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, '1', 'test', '102', '1st Floor', NULL, NULL, 'uploads/room/1757354315.png', 0, 1, 1, 1, '2025-02-24 10:01:59', '2025-09-12 13:33:34', NULL),
+(1, '1', 'test', '102', '1st Floor', NULL, NULL, 'uploads/room/1757354315.png', 0, 1, 1, 1, '2025-02-24 10:01:59', '2025-09-13 07:21:06', NULL),
 (2, '1', 'test2', '1011', '6th Floor', NULL, NULL, 'uploads/room/1757354086.jpg', 1, 1, 1, 1, '2025-02-24 10:26:07', '2025-09-08 11:54:46', NULL),
 (3, '1', 'test33', '1022', '5th Floor', 1022, NULL, 'uploads/room/1757354017.png', 1, 1, 1, 1, '2025-02-28 22:47:10', '2025-09-08 11:53:37', NULL);
 
@@ -594,11 +597,9 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('yLwa1BqIenUl9L4d6Yqt9FxbMhoEfPMFk8b6A4TU', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiZ2pSVk0wUmdMdE9OcGZMQ1FOR0VDdU5nbjRoZ3N2UHFUYjc2bFVPMyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI5OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY2hlY2tJbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTg6ImZsYXNoZXI6OmVudmVsb3BlcyI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1757705614),
-('kRL9s7BNRTsNRgWQRrZ6Y5sB4e4zRHebJi329jyg', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiMlhONmlGM0l0NFpUQ2RmNjBKZHJYN2pDSWNnNE9OUzVKbU5DczdvZyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjIxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjE4OiJmbGFzaGVyOjplbnZlbG9wZXMiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1757440723),
-('hm2ZG1O6c7bmtJgFB4hbMsHWxjTCcyjkOUaLGDUB', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZDltOEdYeHNIdjNuRXQzTUhmaFhxNmszT2s1Zlo1Z05DZEp5MFBaYiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyOToiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2xhdW5kcnkiO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e319', 1757655905),
-('1l8Jitjkhb3VrWEqmBk3bVOiD8AQxKX9k1JTmFfk', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYThPNGN5eXZ1bm1IRWNPSWNuaEpXVHJyMzVMVzNsRDFwNkJPR3h2NCI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2xvZ2luIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1757682306),
-('WLZUWoQ6BTyKm2TKcViDheO7vYJh4774cA7bVUmF', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZUpHY0JaRmVwUE5XTzkyb1N0TGZSZ25oSU9HMDE5MXRoU3p0MjR4NyI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2NoZWNrSW4vMTAvZWRpdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1757683848);
+('wIVdHQOMZTjKqPZwuIrpADcKc3B17f1zv0ZMYFNe', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiVFM5RHk3MkVFWUs0bFFpZWVpc1gwR0RaeGJXT0RjNGd5bnNsek5CVCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM4OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY2hlY2tvdXQvdmlldy8xMiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTg6ImZsYXNoZXI6OmVudmVsb3BlcyI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1757774485),
+('X6vZ8W89Kz0jqX2pOZgUsj0erwotuY5IN6K44ZQy', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoib2tZZVJNcmJXcVBYM3VQUWxUWktuekdyY1VCZGxxaTZKcjdGNFZwRiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI5OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY2hlY2tJbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTg6ImZsYXNoZXI6OmVudmVsb3BlcyI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1757774803),
+('8PhoD5w5SBcNLYm7WJdvuaq8cm8K1OdtOSXrSZWB', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoibHdoVGNSSGxyVnRtMzhFbjhEYXJQdnB4YXVGT28zWVZTM3JqSUYxSyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjc3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvcmVwb3J0L2luY29tZT9lbmRfZGF0ZT0yMDI1LTA5LTEyJnN0YXJ0X2RhdGU9MjAyNS0wOS0xMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTg6ImZsYXNoZXI6OmVudmVsb3BlcyI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1757787188);
 
 -- --------------------------------------------------------
 
