@@ -74,6 +74,8 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::get('/checkout/view/{id}', [CheckInController::class, 'checkoutView'])->name('checkout.view');
     Route::resource('/house-keeping', HouseKeepingController::class);
     Route::resource('/laundry', LaundryController::class);
+    Route::get('/laundry/receive/{id}', [LaundryController::class, 'receive'])->name('laundry.receive');
+    Route::match(['PUT','PATCH'],'/laundry/receive/update/{id}', [LaundryController::class, 'receiveUpdate'])->name('laundry.receive.update');
     Route::resource('/vendors', VendorController::class);
     Route::resource('/supplier', SupplierController::class);
     Route::resource('/frontend/aboutUs', AboutUsController::class);

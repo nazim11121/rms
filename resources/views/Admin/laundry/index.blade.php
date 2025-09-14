@@ -72,9 +72,10 @@
                                 @endphp
                                   {{implode(', ', $amenitiesName)}}
                               </td>
-                              <td>@if($value->status==0) <span>Assign</span>@else<span>Received</span>@endif</td>
+                              <td>@if($value->status==0) <span>Assign</span>@elseif($value->status==1)<span>Received</span>@else<span>Pending</span>@endif</td>
                               <td>{{$value->assign_date}}</td>
                               <td class="text-nowrap">
+                                  <a href="{{route('admin.laundry.receive', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Recive</a>
                                   <a href="{{route('admin.laundry.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
                                   <form action="{{ route('admin.laundry.destroy', $value->id) }}" method="POST" style="display: inline-block;">
                                       @csrf
