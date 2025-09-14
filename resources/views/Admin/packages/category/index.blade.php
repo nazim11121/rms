@@ -33,7 +33,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                       <h4 class="card-title float-left">Packages Category List</h4>
                       <a
-                          href="{{route('packages-category.create')}}"
+                          href="{{route('admin.package-category.create')}}"
                                 type="button"
                                 id="addRowButton"
                                 class="btn btn-primary float-right"
@@ -67,8 +67,8 @@
                               <td>{{$value->name}}</td>
                               <td>@if($value->status==1) <span>Active</span>@else<span>Inactive</span>@endif</td>
                               <td class="text-nowrap">
-                                  <a href="{{route('packages-category.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                                  <form action="{{ route('packages-category.destroy', $value->id) }}" method="POST" style="display: inline-block;">
+                                  <a href="{{route('admin.package-category.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
+                                  <form action="{{ route('admin.package-category.destroy', $value->id) }}" method="POST" style="display: inline-block;">
                                       @csrf
                                       @method('DELETE')
                                       <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this?')">

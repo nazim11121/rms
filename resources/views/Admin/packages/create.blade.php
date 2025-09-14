@@ -33,7 +33,7 @@
                             <h4 class="mb-0">Add Packages</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('packages.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.package.store') }}" enctype="multipart/form-data">
                             @csrf
                                 <!-- Name -->
                                 <div class="mb-3 row">

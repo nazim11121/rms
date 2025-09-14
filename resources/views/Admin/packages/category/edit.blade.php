@@ -33,7 +33,7 @@
                             <h4 class="mb-0">Edit Packages Category</h4>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route('packages-category.update', $data->id) }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.package-category.update', $data->id) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                                 <!-- Name -->
