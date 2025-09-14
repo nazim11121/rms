@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 13, 2025 at 06:14 PM
+-- Generation Time: Sep 14, 2025 at 06:27 PM
 -- Server version: 8.3.0
 -- PHP Version: 8.3.6
 
@@ -332,6 +332,7 @@ CREATE TABLE IF NOT EXISTS `laundries` (
   `room_no` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `vendor_id` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` text COLLATE utf8mb4_unicode_ci,
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1=received,0=assigned',
   `assign_date` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `receive_date` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -352,9 +353,41 @@ CREATE TABLE IF NOT EXISTS `laundries` (
 -- Dumping data for table `laundries`
 --
 
-INSERT INTO `laundries` (`id`, `amenities_id`, `quantity`, `room_no`, `description`, `vendor_id`, `status`, `assign_date`, `receive_date`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(3, '[\"2\",\"3\"]', '[\"1\",\"2\"]', NULL, NULL, '1', 0, '2025-03-05', NULL, 1, NULL, '2025-03-05 06:39:48', '2025-09-09 09:49:04', '2025-09-09 09:49:04'),
-(4, '[\"2\",\"3\"]', '[\"2\",\"4\"]', NULL, NULL, '1', 0, '2025-09-09', NULL, 1, 1, '2025-09-09 09:49:31', '2025-09-09 10:19:29', NULL);
+INSERT INTO `laundries` (`id`, `amenities_id`, `quantity`, `room_no`, `description`, `vendor_id`, `note`, `status`, `assign_date`, `receive_date`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(3, '[\"2\",\"3\"]', '[\"1\",\"2\"]', NULL, NULL, '1', NULL, 0, '2025-03-05', NULL, 1, NULL, '2025-03-05 06:39:48', '2025-09-09 09:49:04', '2025-09-09 09:49:04'),
+(4, '[\"2\",\"3\"]', '[\"2\",\"4\"]', NULL, NULL, '1', NULL, 1, '2025-09-09', NULL, 1, 1, '2025-09-09 09:49:31', '2025-09-14 12:20:28', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laundry_receiveds`
+--
+
+DROP TABLE IF EXISTS `laundry_receiveds`;
+CREATE TABLE IF NOT EXISTS `laundry_receiveds` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `laundry_id` bigint UNSIGNED NOT NULL,
+  `vendor_id` bigint UNSIGNED NOT NULL,
+  `assign_date` date NOT NULL,
+  `amenities_id` bigint DEFAULT NULL,
+  `quantity` int NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` text COLLATE utf8mb4_unicode_ci,
+  `created_by` int DEFAULT NULL,
+  `updated_by` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `laundry_receiveds`
+--
+
+INSERT INTO `laundry_receiveds` (`id`, `laundry_id`, `vendor_id`, `assign_date`, `amenities_id`, `quantity`, `status`, `note`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(5, 4, 1, '2025-09-09', 3, 4, 'Returned', 'late', NULL, NULL, '2025-09-14 11:49:42', '2025-09-14 12:19:36', NULL),
+(4, 4, 1, '2025-09-09', 2, 2, 'Returned', '14/09', NULL, NULL, '2025-09-14 11:49:42', '2025-09-14 12:19:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -388,7 +421,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -410,7 +443,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2025_04_11_162201_create_packages_table', 6),
 (17, '2025_04_12_050227_create_package_categories_table', 7),
 (18, '2025_08_30_071730_create_sliders_table', 8),
-(19, '2025_09_12_190400_create_checkouts_table', 9);
+(19, '2025_09_12_190400_create_checkouts_table', 9),
+(20, '2025_09_14_172339_create_laundry_receiveds_table', 10);
 
 -- --------------------------------------------------------
 
@@ -597,9 +631,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('wIVdHQOMZTjKqPZwuIrpADcKc3B17f1zv0ZMYFNe', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiVFM5RHk3MkVFWUs0bFFpZWVpc1gwR0RaeGJXT0RjNGd5bnNsek5CVCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM4OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY2hlY2tvdXQvdmlldy8xMiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTg6ImZsYXNoZXI6OmVudmVsb3BlcyI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1757774485),
-('X6vZ8W89Kz0jqX2pOZgUsj0erwotuY5IN6K44ZQy', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoib2tZZVJNcmJXcVBYM3VQUWxUWktuekdyY1VCZGxxaTZKcjdGNFZwRiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI5OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvY2hlY2tJbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTg6ImZsYXNoZXI6OmVudmVsb3BlcyI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1757774803),
-('8PhoD5w5SBcNLYm7WJdvuaq8cm8K1OdtOSXrSZWB', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoibHdoVGNSSGxyVnRtMzhFbjhEYXJQdnB4YXVGT28zWVZTM3JqSUYxSyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjc3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvcmVwb3J0L2luY29tZT9lbmRfZGF0ZT0yMDI1LTA5LTEyJnN0YXJ0X2RhdGU9MjAyNS0wOS0xMSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTg6ImZsYXNoZXI6OmVudmVsb3BlcyI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1757787188);
+('gwmnlOzSs19FhfqjZ3B6SitgeFSv28uj832IODPA', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiN3BqcmpleE1lTjY4U1FpQXFzSDNWazN1Y2N6WXJpekFkckVjemcxMiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI5OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvbGF1bmRyeSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTg6ImZsYXNoZXI6OmVudmVsb3BlcyI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1757874028);
 
 -- --------------------------------------------------------
 
@@ -656,7 +688,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Super Admin', 'admin@gmail.com', '2025-02-15 10:45:53', '$2y$12$PIs/a0tXXRuweNsu/AV6AOzJAMTG2zfcGldK7jEBPDVigPW4glR9a', '1q0HmNakT3', '2025-02-15 10:45:54', '2025-02-15 10:45:54');
+(1, 'Super Admin', 'admin@gmail.com', '2025-02-15 10:45:53', '$2y$12$PIs/a0tXXRuweNsu/AV6AOzJAMTG2zfcGldK7jEBPDVigPW4glR9a', 'I2VtWQK7w1QFLRNJUsv2fUUXf8OR52Y8q9z8KF91ltm96XZGjzFlRxtm1amJ', '2025-02-15 10:45:54', '2025-02-15 10:45:54');
 
 -- --------------------------------------------------------
 
