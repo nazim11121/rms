@@ -169,6 +169,23 @@
                   </div>
               </li>
 
+              <li class="nav-item {{ Request::is('account*') ? 'active' : '' }}">
+                  <a data-bs-toggle="collapse" href="#account" aria-expanded="{{ Request::is('account*') ? 'true' : 'false' }}">
+                      <i class="fas fa-layer-group"></i>
+                      <p>Account</p>
+                      <span class="caret"></span>
+                  </a>
+                  <div class="collapse {{ Request::is(['account*','admin.expense.index']) ? 'show' : '' }}" id="account">
+                      <ul class="nav nav-collapse">
+                          <li class="{{ Request::routeIs(['admin.expense.index']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.expense.index') }}">
+                                  <span class="sub-item">Expense</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+
               <li class="nav-item {{ Request::is('reports*') ? 'active' : '' }}">
                   <a data-bs-toggle="collapse" href="#reports" aria-expanded="{{ Request::is('reports*') ? 'true' : 'false' }}">
                       <i class="fas fa-layer-group"></i>

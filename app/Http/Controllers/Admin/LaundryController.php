@@ -234,4 +234,36 @@ class LaundryController extends Controller
             return redirect()->route('admin.laundry.receive')->with('error', 'Data Update Failed.');
         }
     }
+
+    public function details($id){
+        // Fetch the laundry record
+        $data = Laundry::find($id);
+
+        // Get active amenities and vendors
+        $amenitiesList = Amenities::where('status', 1)->get();
+        $vendorList = Vendor::where('status', 1)->get();
+
+        // Decode amenities and quantities from the Laundry model
+        $amenities = json_decode($data->amenities_id, true); // ["2", "3"]
+        $quantities = json_decode($data->quantity, true);    // ["2", "1"]
+
+        // Fetch received items from the LaundryReceived table
+        $receivedItems = LaundryReceived::where('laundry_id', $id)->orderBy('id','ASC')->get();
+
+        // Pre-process received items with amenities, quantities, status, and note
+        $items = [];
+        foreach ($receivedItems as $index => $receivedItem) {
+            $items[] = [
+                'amenity_id' => $amenities[$index] ?? null,
+                'quantity'   => $quantities[$index] ?? 1,
+                'status'     => $receivedItem->status ?? 'Not Returned',  // Use status from LaundryReceived
+                'note'       => $receivedItem->note ?? '',                // Use note from LaundryReceived
+            ];
+        }
+
+        // Pass everything to the view
+        return view('admin.laundry.details', compact(
+            'data', 'amenitiesList', 'vendorList', 'items', 'receivedItems'
+        ));
+    }
 }

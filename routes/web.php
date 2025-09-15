@@ -16,6 +16,8 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\ExpenseController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
@@ -53,9 +55,7 @@ Route::get('/gallery', function () {
     return view('frontend.gallery');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->name('admin.')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -75,6 +75,7 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::resource('/house-keeping', HouseKeepingController::class);
     Route::resource('/laundry', LaundryController::class);
     Route::get('/laundry/receive/{id}', [LaundryController::class, 'receive'])->name('laundry.receive');
+    Route::get('/laundry/details/{id}', [LaundryController::class, 'details'])->name('laundry.details');
     Route::match(['PUT','PATCH'],'/laundry/receive/update/{id}', [LaundryController::class, 'receiveUpdate'])->name('laundry.receive.update');
     Route::resource('/vendors', VendorController::class);
     Route::resource('/supplier', SupplierController::class);
@@ -84,6 +85,8 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::resource('/package-category', PackageCategoryController::class);
     Route::resource('/slider', SliderController::class);
     Route::get('/report/income', [ReportController::class, 'index'])->name('report.income');
+    Route::resource('/account/expense', ExpenseController::class);
+    Route::get('/report/expense', [ReportController::class, 'index'])->name('report.expense');
     
 });
 

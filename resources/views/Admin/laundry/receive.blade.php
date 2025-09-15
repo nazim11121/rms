@@ -110,45 +110,4 @@
         </div>
     </div>
 </div>
-
-{{-- Optional: jQuery for dynamic row addition/removal --}}
-@push('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Add new row (if needed)
-        $(document).on("click", ".addRow", function () {
-            let row = `
-            <tr>
-                <td>
-                    <select class="form-select" name="amenities_id[]">
-                        <option value="">Select Laundry Item</option>
-                        @foreach($amenitiesList as $laundryItem)
-                            <option value="{{ $laundryItem->id }}">{{ $laundryItem->name }}</option>
-                        @endforeach
-                    </select>
-                </td>
-                <td><input type="number" class="form-control" name="quantity[]" value="1" min="1"></td>
-                <td>
-                    <select class="form-select" name="status[]">
-                        <option value="Not Returned">Not Returned</option>
-                        <option value="Returned">Returned</option>
-                    </select>
-                </td>
-                <td><input type="text" class="form-control" name="note[]" placeholder="Enter note..."></td>
-                <td class="text-center">
-                    <button type="button" class="btn btn-danger removeRow">-</button>
-                </td>
-            </tr>`;
-            $("#laundryTable").append(row);
-        });
-
-        // Remove row
-        $(document).on("click", ".removeRow", function () {
-            $(this).closest("tr").remove();
-        });
-    });
-</script>
-@endpush
-
 @endsection

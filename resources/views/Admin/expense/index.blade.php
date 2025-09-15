@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+        <div class="container">
           <div class="page-inner">
             <div class="page-header">
               <ul class="breadcrumbs mb-3">
@@ -13,10 +13,13 @@
                   <i class="icon-arrow-right"></i>
                 </li>
                 <li class="nav-item">
-                  <a href="#">Laundry</a>
+                  <a href="#">Account</a>
                 </li>
                 <li class="separator">
                   <i class="icon-arrow-right"></i>
+                </li>
+                <li class="nav-item">
+                  <a href="#">Expense</a>
                 </li>
                 <li class="nav-item">
                   <a href="#">List</a>
@@ -24,14 +27,13 @@
               </ul>
             </div>
             <div class="row">
-
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                      <h4 class="card-title float-left">Laundry List</h4>
+                      <h4 class="card-title float-left">Expense List</h4>
                       <a
-                          href="{{route('admin.laundry.create')}}"
+                          href="{{route('admin.expense.create')}}"
                                 type="button"
                                 id="addRowButton"
                                 class="btn btn-primary float-right"
@@ -48,10 +50,16 @@
                       >
                         <thead>
                           <tr>
-                            <th>Vendor Name</th>
-                            <th>Laundry Item</th>
-                            <th>Status</th>
+                            <th>Sl</th>
                             <th>Date</th>
+                            <th>Voucher ID</th>
+                            <th>Expense Title</th>
+                            <th>Amount Receiver</th>
+                            <th>Paid Amount</th>
+                            <th>Due Amount</th>
+                            <th>Payment Method</th>
+                            <th>Status</th>
+                            <th>Note</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -64,21 +72,19 @@
                         <tbody>
                           @foreach($allData as $key=>$value)
                             <tr>
-                              <td>{{$value->vendor->name}}</td>
-                              <td>
-                                @php
-                                    $amenitiesIds = json_decode($value->amenities_id, true) ?? [];
-                                    $amenitiesName = !empty($amenitiesIds) ? \App\Models\Admin\Amenities::whereIn('id', $amenitiesIds)->pluck('name')->toArray() : [];
-                                @endphp
-                                  {{implode(', ', $amenitiesName)}}
-                              </td>
-                              <td>@if($value->status==0) <span>Assign</span>@elseif($value->status==1)<span>Received</span>@else<span>Pending</span>@endif</td>
-                              <td>{{$value->assign_date}}</td>
+                              <td>{{++$key}}</td>
+                              <td>{{$value->created_at}}</td>
+                              <td>{{$value->id}}</td>
+                              <td>{{$value->expense_title}}</td>
+                              <td>{{$value->receiver_name}}</td>
+                              <td>{{$value->payment_amount}}</td>
+                              <td>{{$value->due_amount}}</td>
+                              <td>{{$value->payment_method}}</td>
+                              <td>@if($value->status==1) <span>Paid</span>@elseif($value->status==2)<span>Partial</span>@else<span>Unpaid</span>@endif</td>
+                              <td>{{$value->note}}</td>
                               <td class="text-nowrap">
-                                  <a href="{{route('admin.laundry.details', $value->id)}}" class="btn btn-warning btn-xs"><i class="fa fa-eye"></i> Details</a> 
-                                  <a href="{{route('admin.laundry.receive', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-eye"></i> Receive</a>
-                                  <a href="{{route('admin.laundry.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                                  <form action="{{ route('admin.laundry.destroy', $value->id) }}" method="POST" style="display: inline-block;">
+                                  <a href="{{route('admin.expense.edit', $value->id)}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Edit</a>
+                                  <form action="{{ route('admin.expense.destroy', $value->id) }}" method="POST" style="display: inline-block;">
                                       @csrf
                                       @method('DELETE')
                                       <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure you want to delete this?')">
