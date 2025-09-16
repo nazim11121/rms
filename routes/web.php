@@ -84,9 +84,9 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::get('/package/details/{id}', [PackageController::class, 'create'])->name('package.details');
     Route::resource('/package-category', PackageCategoryController::class);
     Route::resource('/slider', SliderController::class);
-    Route::get('/report/income', [ReportController::class, 'index'])->name('report.income');
     Route::resource('/account/expense', ExpenseController::class);
-    Route::get('/report/expense', [ReportController::class, 'index'])->name('report.expense');
+    Route::get('/report/income', [ReportController::class, 'income'])->name('report.income');
+    Route::get('/report/expense', [ReportController::class, 'expense'])->name('report.expense');
     
 });
 

@@ -3,7 +3,7 @@
         <div class="sidebar-logo">
           <!-- Logo Header -->
           <div class="logo-header" data-background-color="dark">
-            <a href="#" class="logo">
+            <a href="{{url('/dashboard')}}" class="logo">
               <img
                 src="{{asset('uploads/frontend/logo.jpg')}}"
                 alt="navbar brand"
@@ -186,17 +186,22 @@
                   </div>
               </li>
 
-              <li class="nav-item {{ Request::is('reports*') ? 'active' : '' }}">
-                  <a data-bs-toggle="collapse" href="#reports" aria-expanded="{{ Request::is('reports*') ? 'true' : 'false' }}">
+              <li class="nav-item {{ Request::is('report*','admin.report.index','admin.report.expense') ? 'active' : '' }}">
+                  <a data-bs-toggle="collapse" href="#reports" aria-expanded="{{ Request::is('report*') ? 'true' : 'false' }}">
                       <i class="fas fa-layer-group"></i>
                       <p>Report</p>
                       <span class="caret"></span>
                   </a>
-                  <div class="collapse {{ Request::is(['reports*','admin.report.index']) ? 'show' : '' }}" id="reports">
+                  <div class="collapse {{ Request::is(['report*','admin.report.index','admin.report.expense']) ? 'show' : '' }}" id="reports">
                       <ul class="nav nav-collapse">
                           <li class="{{ Request::routeIs(['admin.report.income']) ? 'active' : '' }}">
                               <a href="{{ route('admin.report.income') }}">
                                   <span class="sub-item">Income</span>
+                              </a>
+                          </li>
+                          <li class="{{ Request::routeIs(['admin.report.expense']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.report.expense') }}">
+                                  <span class="sub-item">Expense</span>
                               </a>
                           </li>
                       </ul>

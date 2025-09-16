@@ -73,7 +73,7 @@
                           @foreach($allData as $key=>$value)
                             <tr>
                               <td>{{++$key}}</td>
-                              <td>{{$value->created_at}}</td>
+                              <td>{{ date('d-m-Y', strtotime($value->created_at))}}</td>
                               <td>{{$value->id}}</td>
                               <td>{{$value->expense_title}}</td>
                               <td>{{$value->receiver_name}}</td>

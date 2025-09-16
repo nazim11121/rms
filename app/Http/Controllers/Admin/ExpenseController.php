@@ -34,13 +34,17 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:amenities|max:60',
-            'description' => 'nullable',
+            'expense_title' => 'required',
+            'receiver_name' => 'required',
+            'payment_amount' => 'required',
+            'due_amount' => 'required',
+            'payment_method' => 'required',
+            'note' => 'nullable',
             'status' => 'required',
         ]);
  
         if ($validator->fails()) {
-            return redirect('report/expense/create')
+            return redirect('account/expense/create')
                         ->withErrors($validator)
                         ->withInput();
         }
@@ -79,15 +83,19 @@ class ExpenseController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
+    { 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:expense|max:60',
-            'description' => 'nullable',
+            'expense_title' => 'required',
+            'receiver_name' => 'required',
+            'payment_amount' => 'required',
+            'due_amount' => 'nullable',
+            'payment_method' => 'required',
+            'note' => 'nullable',
             'status' => 'required',
         ]);
- 
+
         if ($validator->fails()) {
-            return redirect('report/expense/edit')
+            return redirect('account/expense/edit')
                         ->withErrors($validator)
                         ->withInput();
         }

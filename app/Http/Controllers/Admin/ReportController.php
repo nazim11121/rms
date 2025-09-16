@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admin\Checkout;
 use App\Models\Admin\CheckIn;
+use App\Models\Admin\Checkout;
+use App\Models\Admin\Expense;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +21,7 @@ class ReportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function income(Request $request)
     {
         $query = Checkout::with('checkIn');
 
@@ -33,6 +34,22 @@ class ReportController extends Controller
         $totalAmount = $checkouts->sum('grand_total'); // assuming you have total_amount in checkout table
 
         return view('admin.report.income', compact('checkouts', 'totalAmount'));
+    }
+
+    public function expense(Request $request)
+    {
+        $query = Expense::query();
+
+        if ($request->start_date && $request->end_date) {
+            $query->whereBetween('created_at', [$request->start_date, $request->end_date]);
+        }
+
+        $expenses = $query->get();
+
+        $totalAmount = $expenses->sum('payment_amount');
+        $totalDue = $expenses->sum('due_amount');
+
+        return view('admin.report.expense', compact('expenses', 'totalAmount', 'totalDue'));
     }
 
     /**
