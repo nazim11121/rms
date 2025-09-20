@@ -152,6 +152,23 @@
                   </div>
               </li>
 
+              <li class="nav-item {{ Request::is('food-management*') ? 'active' : '' }}">
+                  <a data-bs-toggle="collapse" href="#food-management" aria-expanded="{{ Request::is('food-management*') ? 'true' : 'false' }}">
+                      <i class="fas fa-layer-group"></i>
+                      <p>Food Management</p>
+                      <span class="caret"></span>
+                  </a>
+                  <div class="collapse {{ Request::is(['food-management*','admin.food-management.index','admin.food-management.create','admin.food-management.edit']) ? 'show' : '' }}" id="food-management">
+                      <ul class="nav nav-collapse">
+                          <li class="{{ Request::routeIs(['admin.food-management.index','admin.food-management.create','admin.food-management.edit']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.food-management.index') }}">
+                                  <span class="sub-item">Food List</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+
               <li class="nav-item {{ Request::is('vendors*') ? 'active' : '' }}">
                   <a data-bs-toggle="collapse" href="#vendor" aria-expanded="{{ Request::is('vendors*') ? 'true' : 'false' }}">
                       <i class="fas fa-layer-group"></i>

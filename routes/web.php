@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\Admin\AmenitiesController;
+use App\Http\Controllers\Admin\FoodManagementController;
 use App\Http\Controllers\Admin\CheckInController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\HouseKeepingController;
@@ -65,6 +66,7 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::resource('/room', RoomController::class);
     Route::resource('/rooms/type', RoomTypeController::class);
     Route::resource('/rooms/amenities', AmenitiesController::class);
+    Route::resource('/food-management', FoodManagementController::class);
     Route::resource('/checkIn', CheckInController::class);
     Route::get('/checkIn/page2/create/{id}', [CheckInController::class, 'page2Create'])->name('checkIn.page2.create');
     Route::post('/checkIn/page2/store', [CheckInController::class, 'page2Store'])->name('checkIn.page2.store');

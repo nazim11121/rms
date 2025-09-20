@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 16, 2025 at 07:51 PM
+-- Generation Time: Sep 20, 2025 at 08:06 AM
 -- Server version: 8.3.0
 -- PHP Version: 8.3.6
 
@@ -94,6 +94,14 @@ CREATE TABLE IF NOT EXISTS `cache` (
   `expiration` int NOT NULL,
   PRIMARY KEY (`key`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cache`
+--
+
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+('sabbir@gmail.com|127.0.0.1:timer', 'i:1758348114;', 1758348114),
+('sabbir@gmail.com|127.0.0.1', 'i:1;', 1758348114);
 
 -- --------------------------------------------------------
 
@@ -237,11 +245,11 @@ DROP TABLE IF EXISTS `expenses`;
 CREATE TABLE IF NOT EXISTS `expenses` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `expense_title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `receiver_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `receiver_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payment_amount` decimal(10,2) DEFAULT NULL,
   `due_amount` decimal(10,2) DEFAULT NULL,
-  `payment_method` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'cash,bkash,nagad,card,bank',
-  `note` text COLLATE utf8mb4_unicode_ci,
+  `payment_method` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'cash,bkash,nagad,card,bank',
+  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1=paid,0=unpaid,2=partial',
   `created_by` int DEFAULT NULL,
   `updated_by` int DEFAULT NULL,
@@ -276,6 +284,38 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `foods`
+--
+
+DROP TABLE IF EXISTS `foods`;
+CREATE TABLE IF NOT EXISTS `foods` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `priority` bigint DEFAULT NULL,
+  `remarks` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1=active,0=inactive',
+  `created_by` int DEFAULT NULL,
+  `updated_by` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `foods`
+--
+
+INSERT INTO `foods` (`id`, `name`, `type`, `category`, `price`, `image`, `priority`, `remarks`, `status`, `created_by`, `updated_by`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Mixed Cary', 'Veg', 'Lunch', 200.00, 'uploads/food/1758355327.png', NULL, 'test', 1, 1, 1, '2025-09-20 01:52:50', '2025-09-20 02:02:07', NULL);
 
 -- --------------------------------------------------------
 
@@ -452,7 +492,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -476,7 +516,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (18, '2025_08_30_071730_create_sliders_table', 8),
 (19, '2025_09_12_190400_create_checkouts_table', 9),
 (20, '2025_09_14_172339_create_laundry_receiveds_table', 10),
-(21, '2025_09_15_170710_create_expences_table', 11);
+(22, '2025_09_15_170710_create_expenses_table', 11),
+(23, '2025_09_20_062816_create_food_table', 11);
 
 -- --------------------------------------------------------
 
@@ -666,7 +707,8 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 ('gwmnlOzSs19FhfqjZ3B6SitgeFSv28uj832IODPA', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiN3BqcmpleE1lTjY4U1FpQXFzSDNWazN1Y2N6WXJpekFkckVjemcxMiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI5OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvbGF1bmRyeSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTg6ImZsYXNoZXI6OmVudmVsb3BlcyI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1757874028),
 ('Iv2PoYKAiFBeCDWvakWZZfOkTlXNH62qrPPBk9BG', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoieVZycGo0dHVNbjVacUc2VFdFdGZ0emp4OGkzZ003bWplR2hDc3pjRSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ0OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWNjb3VudC9leHBlbnNlL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTg6ImZsYXNoZXI6OmVudmVsb3BlcyI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1757958325),
 ('WHEiRdDHLGqscIylgiRpX0Snix6ZTGvRzRiiCUb8', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiRXhPb2YwVllFOEhrQUtUQzhNT1BzalRsUTdiTGNSUjR0RmloRFE4MyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ0OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWNjb3VudC9leHBlbnNlL2NyZWF0ZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTg6ImZsYXNoZXI6OmVudmVsb3BlcyI7YTowOnt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1758039797),
-('4Hrk2xSCA6tnCt2oTy1spUYy9AGYndAMtGJCBacv', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiVHoxRU9acEc5dUlpN3J3R2ZTVW5obnltRmNESVg2b2ZVMzNhUWNleCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1758051298);
+('4Hrk2xSCA6tnCt2oTy1spUYy9AGYndAMtGJCBacv', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiVHoxRU9acEc5dUlpN3J3R2ZTVW5obnltRmNESVg2b2ZVMzNhUWNleCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjMxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvZGFzaGJvYXJkIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO30=', 1758051298),
+('UNCv0sgbRbHpYDJVFUDPnETu0xU0yyptgGSoaTBR', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiaE5ka0I5OWZMTzByalhhRkRFY3UzcXhyYmVoWjBBWVRzNzlDTVZDaSI7czoxODoiZmxhc2hlcjo6ZW52ZWxvcGVzIjthOjA6e31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czozNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2Zvb2QtbWFuYWdlbWVudCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1758355511);
 
 -- --------------------------------------------------------
 
