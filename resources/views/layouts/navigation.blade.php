@@ -158,11 +158,16 @@
                       <p>Food Management</p>
                       <span class="caret"></span>
                   </a>
-                  <div class="collapse {{ Request::is(['food-management*','admin.food-management.index','admin.food-management.create','admin.food-management.edit']) ? 'show' : '' }}" id="food-management">
+                  <div class="collapse {{ Request::is(['food-management*','admin.food-management.index','admin.food-management.create','admin.food-management.edit','admin.food-management.dining.list','admin.dining.create']) ? 'show' : '' }}" id="food-management">
                       <ul class="nav nav-collapse">
                           <li class="{{ Request::routeIs(['admin.food-management.index','admin.food-management.create','admin.food-management.edit']) ? 'active' : '' }}">
                               <a href="{{ route('admin.food-management.index') }}">
                                   <span class="sub-item">Food List</span>
+                              </a>
+                          </li>
+                          <li class="{{ Request::routeIs(['admin.food-management.dining.list','admin.dining.create','admin.dining.edit']) ? 'active' : '' }}">
+                              <a href="{{ route('admin.food-management.dining.list') }}">
+                                  <span class="sub-item">Dining</span>
                               </a>
                           </li>
                       </ul>

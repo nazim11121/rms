@@ -67,6 +67,13 @@ Route::middleware('auth')->name('admin.')->group(function () {
     Route::resource('/rooms/type', RoomTypeController::class);
     Route::resource('/rooms/amenities', AmenitiesController::class);
     Route::resource('/food-management', FoodManagementController::class);
+    Route::get('food-management/dining/list', [FoodManagementController::class, 'diningList'])->name('food-management.dining.list');
+    Route::get('food-management/dining/create', [FoodManagementController::class, 'diningCreate'])->name('food-management.dining.create');
+    Route::post('food-management/dining/store', [FoodManagementController::class, 'diningStore'])->name('food-management.dining.store');
+    Route::get('food-management/dining/{id}/edit', [FoodManagementController::class, 'diningEdit'])->name('food-management.dining.edit');
+    Route::match(['PUT','PATCH'],'food-management/dining/{id}', [FoodManagementController::class, 'diningUpdate'])->name('food-management.dining.update');
+    Route::delete('food-management/dining/destroy', [FoodManagementController::class, 'diningDestroy'])->name('food-management.dining.destroy');
+
     Route::resource('/checkIn', CheckInController::class);
     Route::get('/checkIn/page2/create/{id}', [CheckInController::class, 'page2Create'])->name('checkIn.page2.create');
     Route::post('/checkIn/page2/store', [CheckInController::class, 'page2Store'])->name('checkIn.page2.store');

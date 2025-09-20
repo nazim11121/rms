@@ -93,7 +93,7 @@
         <div class="row mb-2">
             <label class="col-md-6 col-form-label fw-bold">Room/Package Cost</label>
             <div class="col-md-6">
-                <input type="number" step="0.01" class="form-control cost" name="room_cost" id="room_cost" value="{{$checkoutData ? $checkoutData->room_cost:$roomCast}}">
+                <input type="number" step="0.01" class="form-control cost" name="room_cost" id="room_cost" value="{{$checkoutData ? $checkoutData->room_cost:$roomCost}}">
             </div>
         </div>
 
@@ -107,7 +107,7 @@
         <div class="row mb-2">
             <label class="col-md-6 col-form-label fw-bold">Food Cost</label>
             <div class="col-md-6">
-                <input type="number" step="0.01" class="form-control cost" name="food_cost" id="food_cost" value="{{$checkoutData ? $checkoutData->food_cost:0.00}}">
+                <input type="number" step="0.01" class="form-control cost" name="food_cost" id="food_cost" value="{{$checkoutData ? $checkoutData->food_cost:$foodCost}}">
             </div>
         </div>
 
@@ -145,8 +145,8 @@
             <label class="col-md-6 col-form-label fw-bold">Discount Type</label>
             <div class="col-md-6">
                 <select class="form-control" id="discount_type" name="discount_type">
-                    <option value="percent"{{$checkoutData->discount_type=='percent' ? 'selected':''}}>Percentage (%)</option>
-                    <option value="amount"{{$checkoutData->discount_type=='amount' ? 'selected':''}}>Flat Amount</option>
+                    <option value="percent"{{ isset($checkoutData) && $checkoutData->discount_type=='percent' ? 'selected':''}}>Percentage (%)</option>
+                    <option value="amount"{{ isset($checkoutData) && $checkoutData->discount_type=='amount' ? 'selected':''}}>Flat Amount</option>
                 </select>
             </div>
         </div>
@@ -172,12 +172,12 @@
     <div class="col-md-6">
         <select class="form-control" id="payment_method" name="payment_method" required>
             <option value="">-- Select Payment Method --</option>
-            <option value="cash"{{$checkoutData->payment_method=='cash' ? 'selected':''}}>Cash</option>
-            <option value="bkash"{{$checkoutData->payment_method=='bkash' ? 'selected':''}}>Bkash</option>
-            <option value="rocket"{{$checkoutData->payment_method=='rocket' ? 'selected':''}}>Rocket</option>
-            <option value="nagad"{{$checkoutData->payment_method=='nagad' ? 'selected':''}}>Nagad</option>
-            <option value="card"{{$checkoutData->payment_method=='card' ? 'selected':''}}>Card</option>
-            <option value="bank"{{$checkoutData->payment_method=='bank' ? 'selected':''}}>Bank Transfer</option>
+            <option value="cash"{{ isset($checkoutData) && $checkoutData->payment_method=='cash' ? 'selected':''}}>Cash</option>
+            <option value="bkash"{{ isset($checkoutData) && $checkoutData->payment_method=='bkash' ? 'selected':''}}>Bkash</option>
+            <option value="rocket"{{ isset($checkoutData) && $checkoutData->payment_method=='rocket' ? 'selected':''}}>Rocket</option>
+            <option value="nagad"{{ isset($checkoutData) && $checkoutData->payment_method=='nagad' ? 'selected':''}}>Nagad</option>
+            <option value="card"{{ isset($checkoutData) && $checkoutData->payment_method=='card' ? 'selected':''}}>Card</option>
+            <option value="bank"{{ isset($checkoutData) && $checkoutData->payment_method=='bank' ? 'selected':''}}>Bank Transfer</option>
         </select>
     </div>
 </div>

@@ -9,6 +9,7 @@ use App\Models\Admin\Checkout;
 use App\Models\Admin\RoomType;
 use App\Models\Admin\Room;
 use App\Models\Admin\Package;
+use App\Models\Admin\Dining;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -243,7 +244,9 @@ class CheckInController extends Controller
             $roomCost = Package::where('id',$data->package_id)->get()->pluck('price')->first();
         }
 
-        return view('admin.checkOut.create',compact('data','checkoutData','roomList','rooms','selectedRooms','roomCost'));
+        $foodCost = Dining::where('user_id', $id)->sum('subtotal');
+
+        return view('admin.checkOut.create',compact('data','checkoutData','roomList','rooms','selectedRooms','roomCost','foodCost'));
     }
 
     public function getCheckoutInfo(Request $request, $id){

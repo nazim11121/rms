@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function dining()
+    {
+        return $this->hasMany(\App\Models\Admin\Dining::class, 'user_id');
+    }
 }

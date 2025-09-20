@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Admin\Food;
+use App\Models\Admin\Dining;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -149,4 +151,98 @@ class FoodManagementController extends Controller
             return redirect()->route('admin.food-management.index')->with('error', 'Data Delete Failed.');
         }
     }
+
+    public function diningList()
+    {
+        $allData =  User::with('dining')->get();
+
+        return view('admin.dining.index',compact('allData'));
+    }
+
+    public function diningCreate(){
+
+        $customers = User::where('id', '!=', 1)->get();
+        $foods = Food::where('status', 1)->get();
+
+        return view('admin.dining.create',compact(['customers','foods']));
+    }
+
+    public function diningStore(Request $request){
+       
+         $data = $request->validate([
+            'customer_id' => 'required|exists:users,id',
+            'cart' => 'required|array',
+            'cart.*.id' => 'required|exists:foods,id',
+            'cart.*.qty' => 'required|integer|min:1',
+            'cart.*.price' => 'required',
+            'cart.*.subtotal' => 'required',
+        ]);
+
+        // Example logic: save in a pivot table or orders table
+        $customer = \App\Models\User::findOrFail($data['customer_id']);
+
+        // Optional: clear existing cart or orders
+        // $customer->cartItems()->delete();
+
+        foreach ($data['cart'] as $item) {
+            // Save each item, example structure:
+            Dining::create(
+                ['user_id' => $data['customer_id'], 'food_id' => $item['id'],
+                'quantity' => $item['qty'], 'price' => $item['price'], 'subtotal' => $item['subtotal'], 'status' => 1]
+            );
+        }
+
+        return response()->json(['message' => 'Food Cart saved successfully!']);
+    }
+
+    public function diningEdit($id)
+    {
+        $customer = User::findOrFail($id);
+        $customers = User::where('id', '!=', 1)->get();
+        $foods = Food::where('status', 1)->get();
+
+        // Get existing dining items for the customer
+        $diningItems = Dining::where('user_id', $customer->id)->get();
+
+        $cart = [];
+        foreach ($diningItems as $item) {
+            $cart[] = [
+                'id' => $item->food_id,
+                'name' => $item->food->name ?? '',
+                'qty' => $item->quantity,
+                'price' => $item->price
+            ];
+        }
+
+        return view('admin.dining.edit', compact('customers', 'foods', 'customer', 'cart'));
+    }
+
+    public function diningUpdate(Request $request, $id)
+    {
+        $data = $request->validate([
+            'customer_id' => 'required|exists:users,id',
+            'cart' => 'required|array',
+            'cart.*.id' => 'required|exists:foods,id',
+            'cart.*.qty' => 'required|integer|min:1',
+            'cart.*.price' => 'required',
+            'cart.*.subtotal' => 'required',
+        ]);
+
+        // Optional: clear old dining items for the user
+        Dining::where('user_id', $id)->delete();
+
+        foreach ($data['cart'] as $item) { 
+            Dining::create([
+                'user_id' => $data['customer_id'],
+                'food_id' => $item['id'],
+                'quantity' => $item['qty'],
+                'price' => $item['price'],
+                'subtotal' => $item['subtotal'],
+                'status' => 1
+            ]);
+        }
+
+        return response()->json(['message' => 'Food Cart updated successfully!']);
+    }
+
 }
