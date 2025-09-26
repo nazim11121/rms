@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('check_ins', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('invoice')->index()->unsigned()->nullable();
             $table->bigInteger('checkout_id')->index()->unsigned()->nullable();
             $table->bigInteger('package_id')->unsigned()->nullable();
             $table->string('start_date', 60)->index();

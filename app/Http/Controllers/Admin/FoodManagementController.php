@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Admin\Food;
 use App\Models\Admin\Dining;
+use App\Models\Admin\CheckIn;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
@@ -161,7 +162,7 @@ class FoodManagementController extends Controller
 
     public function diningCreate(){
 
-        $customers = User::where('id', '!=', 1)->get();
+        $customers = CheckIn::orderBy('id', 'DESC')->get();
         $foods = Food::where('status', 1)->get();
 
         return view('admin.dining.create',compact(['customers','foods']));
@@ -170,16 +171,16 @@ class FoodManagementController extends Controller
     public function diningStore(Request $request){
        
          $data = $request->validate([
-            'customer_id' => 'required|exists:users,id',
+            'customer_id' => 'required|exists:check_ins,id',
             'cart' => 'required|array',
             'cart.*.id' => 'required|exists:foods,id',
             'cart.*.qty' => 'required|integer|min:1',
             'cart.*.price' => 'required',
-            'cart.*.subtotal' => 'required',
+            'cart.*.subtotal' => 'nullable',
         ]);
 
         // Example logic: save in a pivot table or orders table
-        $customer = \App\Models\User::findOrFail($data['customer_id']);
+        // $customer = \App\Models\CHeckIn::findOrFail($data['id']);
 
         // Optional: clear existing cart or orders
         // $customer->cartItems()->delete();
@@ -188,7 +189,7 @@ class FoodManagementController extends Controller
             // Save each item, example structure:
             Dining::create(
                 ['user_id' => $data['customer_id'], 'food_id' => $item['id'],
-                'quantity' => $item['qty'], 'price' => $item['price'], 'subtotal' => $item['subtotal'], 'status' => 1]
+                'quantity' => $item['qty'], 'price' => $item['price'], 'subtotal' => $item['qty']*$item['price'], 'status' => 1]
             );
         }
 

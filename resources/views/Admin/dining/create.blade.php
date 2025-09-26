@@ -203,7 +203,7 @@
                                 <label for="customer">Select Customer:</label>
                                 <select id="customer" class="form-control">
                                 @foreach($customers as $customer)
-                                    <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                    <option value="{{ $customer->id }}">{{ $customer->name }} - {{ $customer->invoice }}</option>
                                 @endforeach
                                 </select>
                             </div>
@@ -359,7 +359,7 @@
       body: JSON.stringify(payload)
     })
     .then(response => response.json())
-    .then(data => {
+    .then(data => { 
         //   alert(data.message || 'Cart saved!');
         Swal.fire({
             icon: 'success',
@@ -384,7 +384,7 @@
         Swal.fire({
             icon: 'failed',
             title: 'Failed',
-            text: data.message || 'Dining Food Cart submit failed!',
+            text: 'Dining Food Cart submit failed!',
         });
        console.error(error);
     });

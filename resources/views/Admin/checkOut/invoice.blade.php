@@ -4,7 +4,7 @@
     <div class="page-inner">
         <div class="card shadow">
             <div class="card-header d-flex justify-content-between">
-                <h4 class="mb-0">Invoice #{{ $allData->id }}</h4>
+                <h4 class="mb-0">Invoice #{{ $allData->invoice }}</h4>
                 <button class="btn btn-sm btn-success" onclick="printInvoice()">
                     <i class="fa fa-print"></i> Print
                 </button>
@@ -14,7 +14,7 @@
                 <div class="text-center mb-4">
                     <h3>{{env('APP_NAME')}}</h3>
                     <p><strong>Date:</strong> {{ now()->format('d M, Y') }}</p>
-                    <h6 class="mb-0">Invoice #{{ $allData->id }}</h6>
+                    <h6 class="mb-0">Invoice #{{ $allData->invoice }}</h6>
                 </div>
 
                 <h5>👤 Guest Information</h5>

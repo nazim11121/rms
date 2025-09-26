@@ -58,6 +58,7 @@ class CheckInController extends Controller
         }
 
         $validatedData = $validator->validated();
+        $validatedData['invoice'] = rand(1000, 9999);
         $validatedData['created_by'] = Auth::id();
         $dataStore = CheckIn::create($validatedData);
 
@@ -246,7 +247,7 @@ class CheckInController extends Controller
 
         $foodCost = Dining::where('user_id', $id)->sum('subtotal');
 
-        return view('admin.checkOut.create',compact('data','checkoutData','roomList','rooms','selectedRooms','roomCost','foodCost'));
+        return view('admin.checkout.create',compact('data','checkoutData','roomList','rooms','selectedRooms','roomCost','foodCost'));
     }
 
     public function getCheckoutInfo(Request $request, $id){
