@@ -72,7 +72,7 @@
               <li class="nav-item {{ Request::is('package*') ? 'active' : '' }}">
                   <a data-bs-toggle="collapse" href="#package" aria-expanded="{{ Request::is('package*') ? 'true' : 'false' }}">
                       <i class="fas fa-layer-group"></i>
-                      <p>Package</p>
+                      <p>Package Management</p>
                       <span class="caret"></span>
                   </a>
                   <div class="collapse {{ Request::is(['package*','admin.package.index','admin.package.create','admin.package.edit']) ? 'show' : '' }}" id="package">
