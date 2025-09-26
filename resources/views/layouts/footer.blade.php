@@ -17,7 +17,7 @@
                     </nav>
                     <div class="copyright">
                     &copy;{{date('Y')}}, made with <i class="fa fa-heart heart text-danger"></i> by
-                    <a href="https://service.sgelectricservice.com/">N&N</a>
+                    <a href="https://service.sgelectricservice.com/">N&N Co.</a>
                     </div>
                 </div>
                 </footer>

@@ -55,7 +55,7 @@
                       
         </div>
                   <div>
-                        Copyright ©2025. All Rights Reserved.
+                        Copyright ©2025 | All Rights Reserved  | Developed by N&N Co.
                       </div>
               </div>
     </div>
