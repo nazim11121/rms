@@ -713,7 +713,7 @@
                                         </div>
                                     </div>
                         <div class="text-center mt-20 mb-25" data-aos="fade-up">
-                            <a href="{{url('/packages')}}"
+                            <a href="#"
                                 class="btn btn-lg btn-primary">View All Packages</a>
                         </div>
                     </div>
