@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Admin\PackageCategory;
+use App\Models\Admin\RoomType;
 use App\Models\Admin\Package;
 use App\Models\Frontend\AboutUs;
 use App\Models\Admin\Room;
@@ -27,6 +28,55 @@ class FrontendController extends Controller
 
         return view('frontend.index_one',compact(['sliders','aboutUs', 'rooms', 'packageCategory', 'packages']));
     }
+
+    public function packageList(Request $request)
+    {
+        $query = Package::with('packageCategory'); // eager load to avoid N+1
+
+        // Filter by category_id
+        if ($request->filled('category') && $request->category !== 'all') {
+            $query->where('category_id', $request->category);
+        }
+
+        // Price filter
+        if ($request->filled('price_min') || $request->filled('price_max')) {
+            $query->when($request->price_min, fn($q) => $q->where('price','>=',$request->price_min))
+                  ->when($request->price_max, fn($q) => $q->where('price','<=',$request->price_max));
+        }
+
+        // Persons filter
+        if ($request->filled('persons')) {
+            $query->where('no_of_person','>=',$request->persons);
+        }
+
+        // Days filter
+        if ($request->filled('days')) {
+            $query->where('no_of_day','>=',$request->days);
+        }
+
+        $packages   = $query->latest()->paginate(6)->withQueryString();
+        $categories = PackageCategory::orderBy('name')->get();
+
+        return view('frontend.package', compact('packages','categories'));
+    }
+
+    public function roomList(Request $request)
+    {
+        $roomTypes = RoomType::all();
+
+        $query = Room::with('roomType');
+
+        if ($request->has('type') && $request->type !== 'all') {
+            $query->whereHas('roomType', function ($q) use ($request) {
+                $q->where('slug', $request->type); // use slug or id as you prefer
+            });
+        }
+
+        $rooms = $query->paginate(6); // Adjust per page
+
+        return view('frontend.room', compact('roomTypes', 'rooms'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

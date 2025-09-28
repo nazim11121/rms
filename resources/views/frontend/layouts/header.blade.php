@@ -736,12 +736,12 @@
 
                                      
                             
-                 <li class="nav-item mx-xl-1"><a href="#" target="_self"
+                 <li class="nav-item mx-xl-1"><a href="{{ url('/rooms')}}" target="_self"
                      class="nav-link">Rooms</a></li>
 
                                      
                             
-                 <li class="nav-item mx-xl-1"><a href="#" target="_self"
+                 <li class="nav-item mx-xl-1"><a href="{{url('/packages')}}" target="_self"
                      class="nav-link">Packages</a></li>          
                             
                  <li class="nav-item mx-xl-1"><a href="{{url('/gallery')}}" target="_self"

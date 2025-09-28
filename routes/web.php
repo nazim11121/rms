@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
+Route::get('/packages', [FrontendController::class, 'packageList'])->name('packages');
+Route::get('/rooms', [FrontendController::class, 'roomList'])->name('rooms');
 // Route::get('/', function () {
 //     return view('frontend.index_one');
 // });
@@ -36,12 +38,12 @@ Route::get('/services', function () {
 Route::get('/contact', function () {
     return view('frontend.contact');
 });
-Route::get('/rooms', function () {
-    return view('frontend.rooms');
-});
-Route::get('/packages', function () {
-    return view('frontend.packages');
-});
+// Route::get('/rooms', function () {
+//     return view('frontend.rooms');
+// });
+// Route::get('/packages', function () {
+//     return view('frontend.package');
+// })->name('packages');
 Route::get('/packages/details/{id}', function () {
     return view('frontend.packages');
 })->name('package.details');

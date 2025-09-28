@@ -713,7 +713,7 @@
                                         </div>
                                     </div>
                         <div class="text-center mt-20 mb-25" data-aos="fade-up">
-                            <a href="#"
+                            <a href="{{ route('packages')}}"
                                 class="btn btn-lg btn-primary">View All Packages</a>
                         </div>
                     </div>
@@ -729,7 +729,7 @@
             <div class="col-12" data-aos="fade-up">
                 <div class="section-title title-inline mb-50" data-aos="fade-up">
                     <h2 class="title">Featured Rooms</h2>
-                    <a href="#" class="btn btn-lg btn-primary">All Rooms</a>
+                    <a href="{{ url('/rooms')}}" class="btn btn-lg btn-primary">All Rooms</a>
                 </div>
             </div>
 
